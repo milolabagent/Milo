@@ -40,7 +40,7 @@
 </head>
 <body>
   <main class="shell">
-    <section class="hero glass">
+    <section class="hero glass" id="homeHero">
       <div class="hero-top">
         <div>
           <h1>EloPad Genève</h1>
@@ -257,7 +257,7 @@
     const fmt=n=>Number(n).toFixed(2); const state=load();
     const $=id=>document.getElementById(id);
     const els={ratingValue:$('ratingValue'),ratingDelta:$('ratingDelta'),progressBar:$('progressBar'),statMatches:$('statMatches'),statWinRate:$('statWinRate'),statSpent:$('statSpent'),favShort:$('favShort'),historyList:$('historyList'),allCourts:$('allCourts'),courtSelect:$('courtSelect'),startRating:$('startRating'),matchDate:$('matchDate'),costInput:$('costInput'),notes:$('notes'),quickWin:$('quickWin'),quickLoss:$('quickLoss'),courtModal:$('courtModal'),modalPhoto:$('modalPhoto'),modalTitle:$('modalTitle'),modalAddress:$('modalAddress'),modalDesc:$('modalDesc'),mapsLink:$('mapsLink'),closeModal:$('closeModal'),quizLevelTitle:$('quizLevelTitle'),quizLevelText:$('quizLevelText')};
-    function setView(view){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));}
+    function setView(view){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view)); const hero=document.getElementById('homeHero'); if(hero) hero.style.display = view === 'home' ? '' : 'none';}
     document.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.view)));
     function renderCourts(){els.courtSelect.innerHTML=''; els.allCourts.innerHTML=''; courtDetails.forEach((c,i)=>{ const o=document.createElement('option'); o.value=c.name; o.textContent=c.name; els.courtSelect.appendChild(o); const card=document.createElement('article'); card.className='court-card'; card.innerHTML=`<div class="court-photo">${c.photo}</div><div class="court-body"><div class="court-name">${c.name}</div><div class="court-meta">${c.address}</div></div>`; card.onclick=()=>openCourt(c); els.allCourts.appendChild(card); }); [...els.allCourts.children].forEach((n,i)=>n.onclick=()=>openCourt(courtDetails[i])); }
     function openCourt(c){els.modalPhoto.textContent=c.photo; els.modalTitle.textContent=c.name; els.modalAddress.textContent=c.address; els.modalDesc.textContent=c.desc; els.mapsLink.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(c.address); els.courtModal.classList.add('open');}
