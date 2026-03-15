@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#07111f" />
+  <meta name="description" content="EloPad, suivi mobile de niveau padel, historique des matchs, coûts et terrains de Genève." />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <title>EloPad — Genève</title>
+  <style>
+    :root {
+      --bg:#07111f; --bg2:#0d1a2d; --panel:rgba(18,28,49,.88); --panel2:rgba(25,39,67,.96);
+      --line:rgba(255,255,255,.08); --text:#f5f8ff; --muted:#a9b8da; --accent:#6ba8ff; --accent2:#8d7cff;
+      --win:#20d98d; --loss:#ff6678; --gold:#ffd76a; --shadow:0 18px 50px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box} html,body{margin:0;padding:0} body{min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;
+      background:radial-gradient(circle at top left, rgba(107,168,255,.18), transparent 28%),radial-gradient(circle at top right, rgba(141,124,255,.16), transparent 24%),linear-gradient(180deg,var(--bg) 0%,#09111d 35%,var(--bg2) 100%);}
+    .shell{max-width:1100px;margin:0 auto;padding:16px 14px 90px}.glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(16px);border-radius:26px}
+    .hero{padding:18px;margin-bottom:14px}.pill{display:inline-flex;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--accent);font-size:12px;font-weight:700;background:rgba(255,255,255,.04);margin-bottom:10px}
+    h1{margin:0;font-size:36px;line-height:1.03}.lead{color:var(--muted);font-size:15px;line-height:1.5;margin:10px 0 0;max-width:48ch}
+    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}.tab{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);border-radius:18px;padding:12px 10px;font-weight:700}.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    .view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.stack{display:grid;gap:14px}.section{padding:16px}.title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}.section-title{margin:0;font-size:18px;font-weight:800}.subtle{color:var(--muted);font-size:12px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi,.panel,.match,.level-card,.court-card{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:14px}.kpi small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.kpi strong{font-size:22px}
+    .rating{display:grid;grid-template-columns:1.1fr .9fr;gap:12px}.big{font-size:48px;font-weight:900;letter-spacing:-.05em}.muted{color:var(--muted)}
+    .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:40%}
+    .actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}.action{border:0;border-radius:22px;min-height:92px;font-size:30px;font-weight:900;color:#fff;cursor:pointer;position:relative}.action span{position:absolute;left:14px;bottom:12px;font-size:12px;font-weight:700}.win{background:linear-gradient(180deg,#22d38c,#0ea96a)}.loss{background:linear-gradient(180deg,#ff7d88,#db4e5f)}
+    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px} input,select{width:100%;background:#0d1730;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit}.form-grid{display:grid;gap:10px}.row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .list{display:grid;gap:6px}.match{display:grid;grid-template-columns:auto 1fr auto;gap:6px;align-items:center;padding:8px 10px}.badge{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;font-size:15px;font-weight:900}.badge.win{color:#59efb2;background:rgba(32,217,141,.14)}.badge.loss{color:#ff9fab;background:rgba(255,102,120,.14)}
+    .match-title{font-weight:800;font-size:12px}.match-meta{color:var(--muted);font-size:10px;margin-top:2px;line-height:1.3}.delta{font-weight:900;font-size:12px}.pos{color:#59efb2}.neg{color:#ff9fab}
+    .courts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.court-card{cursor:pointer;padding:0;overflow:hidden}.court-photo{height:140px;background:linear-gradient(135deg,#27466f,#1a2b4a);display:flex;align-items:end;padding:12px;font-weight:800}.court-body{padding:14px}.court-name{font-weight:800}.court-meta{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
+    .modal{position:fixed;inset:0;background:rgba(5,9,18,.72);display:none;align-items:end;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.sheet{max-width:520px;width:100%;background:#101a31;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}.sheet-photo{height:180px;border-radius:18px;background:linear-gradient(135deg,#31578b,#1d2e4d);margin-bottom:12px;padding:12px;display:flex;align-items:end;font-weight:900}.sheet p{color:var(--muted);line-height:1.5}.sheet-actions{display:flex;gap:10px}.btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer}.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0}
+    .level-grid{display:grid;gap:10px}.level-card strong{display:block;margin-bottom:6px}.level-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+    .quiz{display:grid;gap:12px;margin-bottom:14px}.quiz-card{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px}.quiz-card h3{margin:0 0 10px;font-size:15px}.quiz-options{display:grid;gap:8px}.quiz-options label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--text);transition:transform .14s ease,border-color .14s ease,background .14s ease,box-shadow .14s ease}.quiz-options label:hover{transform:translateY(-1px);border-color:rgba(107,168,255,.28);background:rgba(107,168,255,.06)}.quiz-options input{width:auto;transform:translateY(2px);accent-color:#6ba8ff}.quiz-options label.selected{border-color:rgba(107,168,255,.45);background:linear-gradient(135deg, rgba(107,168,255,.14), rgba(141,124,255,.12));box-shadow:0 10px 24px rgba(0,0,0,.18)}.quiz-result{background:rgba(107,168,255,.10);border:1px solid rgba(107,168,255,.18);border-radius:18px;padding:12px;margin-bottom:12px}
+    .bottom-nav{position:fixed;left:0;right:0;bottom:0;padding:10px 14px 14px;background:linear-gradient(180deg,rgba(7,17,31,0),rgba(7,17,31,.88) 30%, rgba(7,17,31,.98) 100%)}
+    .bottom-nav .inner{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.nav-btn{padding:12px 8px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;font-weight:700}.nav-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    @media (max-width:899px){.shell{max-width:520px}.grid,.rating,.row-2,.courts,.kpis{grid-template-columns:1fr}.tabs{display:none}h1{font-size:32px}}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero glass">
+      <div class="pill">Prototype premium interactif</div>
+      <h1>EloPad Genève</h1>
+      <p class="lead">Suis tes matchs, tes coûts, ton niveau, et explore les terrains avec une fiche claire adresse + photo.</p>
+    </section>
+
+    <div class="tabs">
+      <button class="tab active" data-view="home">Accueil</button>
+      <button class="tab" data-view="courts">Terrains</button>
+      <button class="tab" data-view="level">Niveau</button>
+    </div>
+
+    <section id="view-home" class="view active">
+      <div class="grid">
+        <div class="stack">
+          <section class="section glass">
+            <div class="title-row"><h2 class="section-title">Vue rapide</h2><span class="subtle">plus claire</span></div>
+            <div class="rating">
+              <div class="panel">
+                <div class="big" id="ratingValue">4.00</div>
+                <div class="muted" id="ratingDelta">niveau de départ</div>
+                <div class="bar"><i id="progressBar"></i></div>
+              </div>
+            </div>
+            <div class="kpis" style="margin-top:12px;">
+              <div class="kpi"><small>Parties jouées</small><strong id="statMatches">0</strong></div>
+              <div class="kpi"><small>% victoire</small><strong id="statWinRate">0%</strong></div>
+              <div class="kpi"><small>Dépensé</small><strong id="statSpent">0 CHF</strong></div>
+              <div class="kpi"><small>Terrain favori</small><strong id="favShort">—</strong></div>
+            </div>
+          </section>
+          <section class="section glass">
+            <div class="title-row"><h2 class="section-title">Ajouter un match</h2><span class="subtle">directement depuis l’accueil</span></div>
+            <div class="panel">
+              <div class="form-grid">
+                <div class="row-2">
+                  <div><label for="startRating">Niveau de base</label><input id="startRating" type="number" step="0.01" min="1" max="10" value="4.00" /></div>
+                  <div><label>Barème fixe</label><input value="Victoire +0.03 / Défaite -0.05" disabled /></div>
+                </div>
+                <div><label for="courtSelect">Terrain</label><select id="courtSelect"></select></div>
+                <div class="row-2">
+                  <div><label for="matchDate">Date</label><input id="matchDate" type="date" /></div>
+                  <div><label for="costInput">Coût du match (CHF)</label><input id="costInput" type="number" step="0.5" min="0" placeholder="10 ou 15" /></div>
+                </div>
+                <div><label for="notes">Note rapide</label><input id="notes" type="text" placeholder="Ex : match serré, bon feeling" /></div>
+                <div class="actions" style="margin-top:4px;">
+                  <button class="action win" id="quickWin">+<span>Victoire</span></button>
+                  <button class="action loss" id="quickLoss">−<span>Défaite</span></button>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="section glass">
+            <div class="title-row"><h2 class="section-title">Historique récent</h2><span class="subtle">tes derniers matchs</span></div>
+            <div class="list" id="historyList"></div>
+          </section>
+        </div>
+        <div class="stack"></div>
+      </div>
+    </section>
+
+
+    <section id="view-courts" class="view">
+      <section class="section glass">
+        <div class="title-row"><h2 class="section-title">Terrains</h2><span class="subtle">adresse + photo</span></div>
+        <div class="courts" id="allCourts"></div>
+      </section>
+    </section>
+
+    <section id="view-level" class="view">
+      <section class="section glass">
+        <div class="title-row"><h2 class="section-title">Estimer mon niveau</h2><span class="subtle">quiz + grille</span></div>
+        <div class="quiz-result">
+          <strong id="quizLevelTitle">Estimation rapide</strong>
+          <p id="quizLevelText">Réponds aux questions ci-dessous pour obtenir une estimation simple de ton niveau.</p>
+        </div>
+        <div class="quiz" id="levelQuiz">
+          <article class="quiz-card">
+            <h3>1. Régularité en échange</h3>
+            <div class="quiz-options">
+              <label><input type="radio" name="q1" value="1"> J’ai du mal à tenir l’échange</label>
+              <label><input type="radio" name="q1" value="3"> Je tiens quelques balles sans vraie maîtrise</label>
+              <label><input type="radio" name="q1" value="5"> Je suis assez régulier en rythme modéré</label>
+              <label><input type="radio" name="q1" value="7"> Je tiens bien le tempo avec peu de fautes</label>
+              <label><input type="radio" name="q1" value="9"> Je suis très régulier même sous pression</label>
+            </div>
+          </article>
+          <article class="quiz-card">
+            <h3>2. Utilisation des vitres</h3>
+            <div class="quiz-options">
+              <label><input type="radio" name="q2" value="1"> Je ne sais pas encore les jouer</label>
+              <label><input type="radio" name="q2" value="3"> Je commence à m’en servir mais je doute</label>
+              <label><input type="radio" name="q2" value="5"> Je défends correctement avec les vitres</label>
+              <label><input type="radio" name="q2" value="7"> Je m’en sers pour relancer l’échange intelligemment</label>
+              <label><input type="radio" name="q2" value="9"> J’utilise les vitres comme un vrai levier tactique</label>
+            </div>
+          </article>
+          <article class="quiz-card">
+            <h3>3. Jeu au filet / transition</h3>
+            <div class="quiz-options">
+              <label><input type="radio" name="q3" value="1"> Je reste surtout au fond</label>
+              <label><input type="radio" name="q3" value="3"> Je monte mais je perds vite le point</label>
+              <label><input type="radio" name="q3" value="5"> Je suis à l’aise au filet la plupart du temps</label>
+              <label><input type="radio" name="q3" value="7"> Je sais fermer les angles et construire</label>
+              <label><input type="radio" name="q3" value="9"> J’impose un vrai jeu d’attaque au filet</label>
+            </div>
+          </article>
+          <article class="quiz-card">
+            <h3>4. Lecture tactique / placement</h3>
+            <div class="quiz-options">
+              <label><input type="radio" name="q4" value="1"> Je joue surtout à l’instinct</label>
+              <label><input type="radio" name="q4" value="3"> Je commence à chercher les bonnes zones</label>
+              <label><input type="radio" name="q4" value="5"> Je construis les points de façon cohérente</label>
+              <label><input type="radio" name="q4" value="7"> Je varie selon les adversaires et les situations</label>
+              <label><input type="radio" name="q4" value="9"> Je lis très bien le match et j’impose un plan</label>
+            </div>
+          </article>
+          <article class="quiz-card">
+            <h3>5. Niveau général ressenti</h3>
+            <div class="quiz-options">
+              <label><input type="radio" name="q5" value="2"> Débutant / loisir occasionnel</label>
+              <label><input type="radio" name="q5" value="4"> Élémentaire à intermédiaire</label>
+              <label><input type="radio" name="q5" value="6"> Confirmé / bon joueur club</label>
+              <label><input type="radio" name="q5" value="8"> Avancé / expert club</label>
+              <label><input type="radio" name="q5" value="10"> Très haut niveau / compétition forte</label>
+            </div>
+          </article>
+        </div>
+        <div class="level-grid">
+          <article class="level-card"><strong>1 · Débutant</strong><p>Tu découvres encore les bases du padel, les règles, le placement et la lecture des trajectoires.</p></article>
+          <article class="level-card"><strong>2 · Perfectionnement</strong><p>Tu commences à rallonger les échanges mais tu restes encore irrégulier sur le contrôle et le placement.</p></article>
+          <article class="level-card"><strong>3 · Élémentaire</strong><p>Tu joues plus proprement, tu comprends mieux les zones, mais ton jeu reste encore fragile sous pression.</p></article>
+          <article class="level-card"><strong>4 · Intermédiaire</strong><p>Tu tiens les échanges, tu commences à utiliser les vitres et tu comprends mieux le jeu en équipe.</p></article>
+          <article class="level-card"><strong>5 · Confirmé</strong><p>Tu construis les points avec plus de maîtrise, tu montes mieux au filet et tu fais moins de fautes directes.</p></article>
+          <article class="level-card"><strong>6 · Avancé</strong><p>Tu maîtrises bien les transitions défense/attaque, le placement et les schémas classiques du padel.</p></article>
+          <article class="level-card"><strong>7 · Avancé+</strong><p>Tu imposes davantage ton rythme, tu varies intelligemment et tu lis bien le jeu adverse.</p></article>
+          <article class="level-card"><strong>8 · Expert</strong><p>Ton niveau est très solide techniquement et tactiquement, avec très peu de déchets dans le jeu.</p></article>
+          <article class="level-card"><strong>9 · Expert+</strong><p>Très haut niveau de régularité, de pression tactique et de lecture du match.</p></article>
+          <article class="level-card"><strong>10 · Élite</strong><p>Niveau d’excellence, très rare, avec une maîtrise complète du jeu, de l’intensité et de la stratégie.</p></article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal" id="courtModal">
+    <div class="sheet">
+      <div class="sheet-photo" id="modalPhoto"></div>
+      <h3 id="modalTitle" style="margin:0 0 8px"></h3>
+      <p id="modalAddress"></p>
+      <p id="modalDesc"></p>
+      <div class="sheet-actions">
+        <button class="btn" id="closeModal">Fermer</button>
+        <a class="btn primary" id="mapsLink" target="_blank">Ouvrir dans Maps</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <div class="inner">
+      <button class="nav-btn active" data-view="home">Accueil</button>
+      <button class="nav-btn" data-view="courts">Terrains</button>
+      <button class="nav-btn" data-view="level">Niveau</button>
+    </div>
+  </div>
+
+  <script>
+    const STORAGE_KEY='padel-rating-geneva-v2';
+    const courtDetails=[
+      {name:'AirPad La Praille', address:'Secteur La Praille, Genève', photo:'AirPad La Praille', desc:'Complexe moderne pensé pour un usage urbain rapide. Bon candidat pour une fiche terrain premium avec photo réelle et réservation.'},
+      {name:'AirPad Les Acacias', address:'Les Acacias, Genève', photo:'AirPad Les Acacias', desc:'Spot pratique côté ville, utile pour les matchs après le travail et les sessions courtes.'},
+      {name:'Champel', address:'Champel, Genève', photo:'Champel', desc:'Terrain côté Champel à suivre dans l’app, avec intérêt pour comparer tes résultats selon le quartier.'},
+      {name:'Vessy', address:'Vessy, Genève', photo:'Vessy', desc:'Terrain intéressant pour analyser tes performances et tes habitudes de jeu selon le lieu.'},
+      {name:'Chambésy', address:'Chambésy, Genève', photo:'Chambésy', desc:'Zone Chambésy, utile pour élargir la couverture de Genève et garder un historique complet.'},
+      {name:'La Jonction', address:'La Jonction, Genève', photo:'La Jonction', desc:'Terrain urbain pratique, facile à retrouver dans l’app et à relier à un usage régulier.'},
+      {name:'Bernex', address:'Bernex, Genève', photo:'Bernex', desc:'Terrain de Bernex intégré à la base locale avec une fiche dédiée pour l’usage mobile.'},
+      {name:'Les Évaux', address:'Chemin François-Chavaz, Onex / Les Évaux', photo:'Les Évaux', desc:'Référence forte dans la zone Genève / Onex, très utile comme terrain récurrent dans l’historique.'}
+    ];
+    const defaultState={currentRating:4,startRating:4,delta:0.03,lossDelta:0.05,matches:[],courts:courtDetails.map(c=>c.name)};
+    const load=()=>{try{return {...defaultState,...JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}')}}catch{return {...defaultState}}};
+    const save=()=>localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+    const fmt=n=>Number(n).toFixed(2); const state=load();
+    const $=id=>document.getElementById(id);
+    const els={ratingValue:$('ratingValue'),ratingDelta:$('ratingDelta'),progressBar:$('progressBar'),statMatches:$('statMatches'),statWinRate:$('statWinRate'),statSpent:$('statSpent'),favShort:$('favShort'),historyList:$('historyList'),allCourts:$('allCourts'),courtSelect:$('courtSelect'),startRating:$('startRating'),matchDate:$('matchDate'),costInput:$('costInput'),notes:$('notes'),quickWin:$('quickWin'),quickLoss:$('quickLoss'),courtModal:$('courtModal'),modalPhoto:$('modalPhoto'),modalTitle:$('modalTitle'),modalAddress:$('modalAddress'),modalDesc:$('modalDesc'),mapsLink:$('mapsLink'),closeModal:$('closeModal'),quizLevelTitle:$('quizLevelTitle'),quizLevelText:$('quizLevelText')};
+    function setView(view){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view));}
+    document.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.view)));
+    function renderCourts(){els.courtSelect.innerHTML=''; els.allCourts.innerHTML=''; courtDetails.forEach((c,i)=>{ const o=document.createElement('option'); o.value=c.name; o.textContent=c.name; els.courtSelect.appendChild(o); const card=document.createElement('article'); card.className='court-card'; card.innerHTML=`<div class="court-photo">${c.photo}</div><div class="court-body"><div class="court-name">${c.name}</div><div class="court-meta">${c.address}</div></div>`; card.onclick=()=>openCourt(c); els.allCourts.appendChild(card); });
+      [...els.allCourts.children].forEach((n,i)=>n.onclick=()=>openCourt(courtDetails[i])); }
+    function openCourt(c){els.modalPhoto.textContent=c.photo; els.modalTitle.textContent=c.name; els.modalAddress.textContent=c.address; els.modalDesc.textContent=c.desc; els.mapsLink.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(c.address); els.courtModal.classList.add('open');}
+    els.closeModal.onclick=()=>els.courtModal.classList.remove('open'); els.courtModal.onclick=e=>{ if(e.target===els.courtModal) els.courtModal.classList.remove('open'); };
+    function renderStats(){const wins=state.matches.filter(m=>m.result==='win').length; const spent=state.matches.reduce((s,m)=>s+Number(m.cost||0),0); const rate=state.matches.length?Math.round(wins/state.matches.length*100):0; const counts={}; state.matches.forEach(m=>counts[m.court]=(counts[m.court]||0)+1); const fav=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]; els.ratingValue.textContent=fmt(state.currentRating); els.ratingDelta.textContent=`${state.currentRating-state.startRating>=0?'+':''}${fmt(state.currentRating-state.startRating)} depuis le départ`; els.progressBar.style.width=Math.max(4,Math.min(100,((state.currentRating-1)/6)*100))+'%'; els.statMatches.textContent=state.matches.length; els.statWinRate.textContent=rate+'%'; els.statSpent.textContent=Math.round(spent)+' CHF'; els.favShort.textContent=fav?fav[0]:'—'; els.startRating.value=fmt(state.startRating); }
+    function renderHistory(){els.historyList.innerHTML=''; if(!state.matches.length){els.historyList.innerHTML='<div class="panel muted">Aucun match enregistré pour l’instant.</div>'; return;} [...state.matches].reverse().slice(0,8).forEach(m=>{const pos=m.change>0; const el=document.createElement('article'); el.className='match'; el.innerHTML=`<div class="badge ${pos?'win':'loss'}">${pos?'+':'−'}</div><div><div class="match-title">${pos?'Victoire':'Défaite'} — ${m.court}</div><div class="match-meta">${m.date} · ${m.cost||0} CHF · ${m.notes||'sans note'} · niveau ${fmt(m.before)} → ${fmt(m.after)}</div></div><div class="delta ${pos?'pos':'neg'}">${pos?'+':''}${fmt(m.change)}</div>`; els.historyList.appendChild(el);});}
+    function addMatch(result){state.startRating=Number(els.startRating.value||state.startRating); state.delta=0.03; state.lossDelta=0.05; if(state.matches.length===0) state.currentRating=state.startRating; const before=state.currentRating; const change=result==='win'?state.delta:-state.lossDelta; const after=Math.max(0,Number((before+change).toFixed(2))); state.matches.push({result,court:els.courtSelect.value,date:els.matchDate.value||new Date().toISOString().slice(0,10),cost:Number(els.costInput.value||0),notes:els.notes.value.trim(),before,after,change}); state.currentRating=after; els.costInput.value=''; els.notes.value=''; render(); }
+    function renderQuiz(){
+      document.querySelectorAll('#levelQuiz label').forEach(label => {
+        const input = label.querySelector('input');
+        label.classList.toggle('selected', !!input?.checked);
+      });
+      const vals=['q1','q2','q3','q4','q5'].map(q=>Number((document.querySelector(`input[name="${q}"]:checked`)||{}).value||0));
+      const answered=vals.filter(Boolean).length;
+      if(!answered){ els.quizLevelTitle.textContent='Estimation rapide'; els.quizLevelText.textContent='Réponds aux questions ci-dessous pour obtenir une estimation simple de ton niveau.'; return; }
+      const avg=vals.reduce((a,b)=>a+b,0)/answered;
+      const level=Math.max(1, Math.min(10, Math.round(avg)));
+      const labels={1:'Débutant',2:'Perfectionnement',3:'Élémentaire',4:'Intermédiaire',5:'Confirmé',6:'Avancé',7:'Avancé+',8:'Expert',9:'Expert+',10:'Élite'};
+      els.quizLevelTitle.textContent=`Niveau estimé : ${level}/10 — ${labels[level]}`;
+      els.quizLevelText.textContent=`Estimation actuelle : ${labels[level]}. Cette estimation s’appuie sur ta régularité, l’usage des vitres, la qualité de ton jeu au filet, ton placement tactique et ton ressenti global.`;
+    }
+    function render(){renderCourts(); renderStats(); renderHistory(); renderQuiz(); save();}
+    els.quickWin.onclick=()=>addMatch('win'); els.quickLoss.onclick=()=>addMatch('loss'); document.querySelectorAll('#levelQuiz input').forEach(i=>i.addEventListener('change',renderQuiz)); els.matchDate.value=new Date().toISOString().slice(0,10); render();
+  </script>
+</body>
+</html>
