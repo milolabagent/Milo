@@ -31,7 +31,7 @@
     .courts,.events,.roadmap-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.court-card{cursor:pointer;padding:0;overflow:hidden}.court-photo{height:140px;background:linear-gradient(135deg,#27466f,#1a2b4a);display:flex;align-items:end;padding:12px;font-weight:800}.court-body{padding:14px}.court-name,.event-title{font-weight:800}.court-meta,.event-meta{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
     .event-chip{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(107,168,255,.12);color:var(--accent);font-size:11px;font-weight:700;margin-bottom:10px}
     .auth-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.auth-card h3,.roadmap-card h3{margin:0 0 8px;font-size:16px}.auth-card p,.roadmap-card p{margin:0;color:var(--muted);line-height:1.45;font-size:13px}.btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer}.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0}
-    .modal{position:fixed;inset:0;background:rgba(5,9,18,.72);display:none;align-items:end;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.sheet{max-width:520px;width:100%;background:#101a31;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}.sheet-photo{height:180px;border-radius:18px;background:linear-gradient(135deg,#31578b,#1d2e4d);margin-bottom:12px;padding:12px;display:flex;align-items:end;font-weight:900}.sheet p{color:var(--muted);line-height:1.5}.sheet-actions{display:flex;gap:10px}
+    .modal{position:fixed;inset:0;background:rgba(5,9,18,.72);display:none;align-items:end;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.sheet{max-width:520px;width:100%;background:#101a31;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}.sheet-photo{height:180px;border-radius:18px;background:linear-gradient(135deg,#31578b,#1d2e4d);margin-bottom:12px;padding:12px;display:flex;align-items:end;font-weight:900}.sheet p{color:var(--muted);line-height:1.5}.sheet-actions{display:flex;gap:10px}.auth-modal-card{display:grid;gap:10px}.auth-switch{display:flex;gap:8px;margin-bottom:8px}.auth-switch button{flex:1}
     .level-grid{display:grid;gap:10px}.level-card strong{display:block;margin-bottom:6px}.level-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
     .quiz{display:grid;gap:12px;margin-bottom:14px}.quiz-card{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px}.quiz-card h3{margin:0 0 10px;font-size:15px}.quiz-options{display:grid;gap:8px}.quiz-options label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--text);transition:transform .14s ease,border-color .14s ease,background .14s ease,box-shadow .14s ease}.quiz-options label.selected{border-color:rgba(107,168,255,.45);background:linear-gradient(135deg, rgba(107,168,255,.14), rgba(141,124,255,.12));box-shadow:0 10px 24px rgba(0,0,0,.18)}.quiz-options input{width:auto;transform:translateY(2px);accent-color:#6ba8ff}.quiz-result{background:rgba(107,168,255,.10);border:1px solid rgba(107,168,255,.18);border-radius:18px;padding:12px;margin-bottom:12px}
     .bottom-nav{position:fixed;left:0;right:0;bottom:0;padding:10px 14px 14px;background:linear-gradient(180deg,rgba(7,17,31,0),rgba(7,17,31,.88) 30%, rgba(7,17,31,.98) 100%)}.bottom-nav .inner{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.nav-btn{padding:12px 8px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;font-weight:700}.nav-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
@@ -47,7 +47,7 @@
           <p class="lead">Suis tes matchs, tes coûts, ton niveau, et explore les terrains proche de chez toi.</p>
           <p class="lead" style="margin-top:10px;color:#ffd76a;font-weight:700;">Version du 15 mars.</p>
         </div>
-        <div class="pill">Compte & cloud bientôt</div>
+        <button class="pill" id="openAuth">Se connecter</button>
       </div>
     </section>
 
@@ -102,15 +102,15 @@
 
         <div class="stack">
           <section class="section glass">
-            <div class="title-row"><h2 class="section-title">Espace utilisateur</h2><span class="subtle">préparation multi-compte</span></div>
+            <div class="title-row"><h2 class="section-title">Espace utilisateur</h2><span class="subtle">connexion à venir</span></div>
             <div class="auth-grid">
               <article class="auth-card">
                 <h3>Créer un compte</h3>
-                <p>Un pseudo + mot de passe pour retrouver tes statistiques, ton niveau, tes coûts et ton historique depuis n’importe quel appareil.</p>
+                <p>Chaque joueur pourra avoir son pseudo, son mot de passe et retrouver ses stats sur plusieurs appareils.</p>
               </article>
               <article class="auth-card">
-                <h3>Se reconnecter</h3>
-                <p>Connexion persistante prévue pour permettre à chaque joueur de garder ses propres données sans les mélanger avec celles des autres.</p>
+                <h3>Connexion</h3>
+                <p>Le bouton « Se connecter » est déjà prévu dans l’interface pour préparer la future version multi-utilisateur.</p>
               </article>
             </div>
           </section>
@@ -220,6 +220,47 @@
     </section>
   </main>
 
+  <div class="modal" id="authModal">
+    <div class="sheet">
+      <div class="auth-switch">
+        <button class="btn primary" id="showLogin">Se connecter</button>
+        <button class="btn" id="showSignup">Créer un compte</button>
+      </div>
+      <div class="auth-modal-card" id="loginPanel">
+        <h3 style="margin:0">Connexion</h3>
+        <p>Préparation de la future version multi-utilisateur. L’UI est prête, le backend viendra ensuite.</p>
+        <div>
+          <label for="loginPseudo">Pseudo</label>
+          <input id="loginPseudo" type="text" placeholder="Ton pseudo" />
+        </div>
+        <div>
+          <label for="loginPassword">Mot de passe</label>
+          <input id="loginPassword" type="password" placeholder="Ton mot de passe" />
+        </div>
+        <div class="sheet-actions">
+          <button class="btn" id="closeAuth">Fermer</button>
+          <button class="btn primary">Connexion bientôt</button>
+        </div>
+      </div>
+      <div class="auth-modal-card" id="signupPanel" style="display:none;">
+        <h3 style="margin:0">Créer un compte</h3>
+        <p>Chaque utilisateur pourra bientôt créer son espace personnel pour garder ses stats, ses matchs et ses coûts.</p>
+        <div>
+          <label for="signupPseudo">Pseudo</label>
+          <input id="signupPseudo" type="text" placeholder="Choisis un pseudo" />
+        </div>
+        <div>
+          <label for="signupPassword">Mot de passe</label>
+          <input id="signupPassword" type="password" placeholder="Choisis un mot de passe" />
+        </div>
+        <div class="sheet-actions">
+          <button class="btn" id="closeAuth2">Fermer</button>
+          <button class="btn primary">Création bientôt</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="modal" id="courtModal">
     <div class="sheet">
       <div class="sheet-photo" id="modalPhoto"></div>
@@ -256,12 +297,19 @@
     const save=()=>localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
     const fmt=n=>Number(n).toFixed(2); const state=load();
     const $=id=>document.getElementById(id);
-    const els={ratingValue:$('ratingValue'),ratingDelta:$('ratingDelta'),progressBar:$('progressBar'),statMatches:$('statMatches'),statWinRate:$('statWinRate'),statSpent:$('statSpent'),favShort:$('favShort'),historyList:$('historyList'),allCourts:$('allCourts'),courtSelect:$('courtSelect'),startRating:$('startRating'),matchDate:$('matchDate'),costInput:$('costInput'),notes:$('notes'),quickWin:$('quickWin'),quickLoss:$('quickLoss'),courtModal:$('courtModal'),modalPhoto:$('modalPhoto'),modalTitle:$('modalTitle'),modalAddress:$('modalAddress'),modalDesc:$('modalDesc'),mapsLink:$('mapsLink'),closeModal:$('closeModal'),quizLevelTitle:$('quizLevelTitle'),quizLevelText:$('quizLevelText')};
+    const els={ratingValue:$('ratingValue'),ratingDelta:$('ratingDelta'),progressBar:$('progressBar'),statMatches:$('statMatches'),statWinRate:$('statWinRate'),statSpent:$('statSpent'),favShort:$('favShort'),historyList:$('historyList'),allCourts:$('allCourts'),courtSelect:$('courtSelect'),startRating:$('startRating'),matchDate:$('matchDate'),costInput:$('costInput'),notes:$('notes'),quickWin:$('quickWin'),quickLoss:$('quickLoss'),openAuth:$('openAuth'),authModal:$('authModal'),showLogin:$('showLogin'),showSignup:$('showSignup'),loginPanel:$('loginPanel'),signupPanel:$('signupPanel'),closeAuth:$('closeAuth'),closeAuth2:$('closeAuth2'),courtModal:$('courtModal'),modalPhoto:$('modalPhoto'),modalTitle:$('modalTitle'),modalAddress:$('modalAddress'),modalDesc:$('modalDesc'),mapsLink:$('mapsLink'),closeModal:$('closeModal'),quizLevelTitle:$('quizLevelTitle'),quizLevelText:$('quizLevelText')};
     function setView(view){document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+view));document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===view)); const hero=document.getElementById('homeHero'); if(hero) hero.style.display = view === 'home' ? '' : 'none';}
     document.querySelectorAll('[data-view]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.view)));
     function renderCourts(){els.courtSelect.innerHTML=''; els.allCourts.innerHTML=''; courtDetails.forEach((c,i)=>{ const o=document.createElement('option'); o.value=c.name; o.textContent=c.name; els.courtSelect.appendChild(o); const card=document.createElement('article'); card.className='court-card'; card.innerHTML=`<div class="court-photo">${c.photo}</div><div class="court-body"><div class="court-name">${c.name}</div><div class="court-meta">${c.address}</div></div>`; card.onclick=()=>openCourt(c); els.allCourts.appendChild(card); }); [...els.allCourts.children].forEach((n,i)=>n.onclick=()=>openCourt(courtDetails[i])); }
     function openCourt(c){els.modalPhoto.textContent=c.photo; els.modalTitle.textContent=c.name; els.modalAddress.textContent=c.address; els.modalDesc.textContent=c.desc; els.mapsLink.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(c.address); els.courtModal.classList.add('open');}
     els.closeModal.onclick=()=>els.courtModal.classList.remove('open'); els.courtModal.onclick=e=>{ if(e.target===els.courtModal) els.courtModal.classList.remove('open'); };
+    function openAuth(mode='login'){ els.authModal.classList.add('open'); const login = mode === 'login'; els.loginPanel.style.display = login ? '' : 'none'; els.signupPanel.style.display = login ? 'none' : ''; els.showLogin.classList.toggle('primary', login); els.showSignup.classList.toggle('primary', !login); }
+    els.openAuth.onclick=()=>openAuth('login');
+    els.showLogin.onclick=()=>openAuth('login');
+    els.showSignup.onclick=()=>openAuth('signup');
+    els.closeAuth.onclick=()=>els.authModal.classList.remove('open');
+    els.closeAuth2.onclick=()=>els.authModal.classList.remove('open');
+    els.authModal.onclick=e=>{ if(e.target===els.authModal) els.authModal.classList.remove('open'); };
     function renderStats(){const wins=state.matches.filter(m=>m.result==='win').length; const spent=state.matches.reduce((s,m)=>s+Number(m.cost||0),0); const rate=state.matches.length?Math.round(wins/state.matches.length*100):0; const counts={}; state.matches.forEach(m=>counts[m.court]=(counts[m.court]||0)+1); const fav=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]; els.ratingValue.textContent=fmt(state.currentRating); els.ratingDelta.textContent=`${state.currentRating-state.startRating>=0?'+':''}${fmt(state.currentRating-state.startRating)} depuis le départ`; els.progressBar.style.width=Math.max(4,Math.min(100,((state.currentRating-1)/6)*100))+'%'; els.statMatches.textContent=state.matches.length; els.statWinRate.textContent=rate+'%'; els.statSpent.textContent=Math.round(spent)+' CHF'; els.favShort.textContent=fav?fav[0]:'—'; els.startRating.value=fmt(state.startRating); }
     function renderHistory(){els.historyList.innerHTML=''; if(!state.matches.length){els.historyList.innerHTML='<div class="panel muted">Aucun match enregistré pour l’instant.</div>'; return;} [...state.matches].reverse().slice(0,8).forEach(m=>{const pos=m.change>0; const el=document.createElement('article'); el.className='match'; el.innerHTML=`<div class="badge ${pos?'win':'loss'}">${pos?'+':'−'}</div><div><div class="match-title">${pos?'Victoire':'Défaite'} — ${m.court}</div><div class="match-meta">${m.date} · ${m.cost||0} CHF · ${m.notes||'sans note'} · niveau ${fmt(m.before)} → ${fmt(m.after)}</div></div><div class="delta ${pos?'pos':'neg'}">${pos?'+':''}${fmt(m.change)}</div>`; els.historyList.appendChild(el);});}
     function addMatch(result){state.startRating=Number(els.startRating.value||state.startRating); state.delta=0.03; state.lossDelta=0.05; if(state.matches.length===0) state.currentRating=state.startRating; const before=state.currentRating; const change=result==='win'?state.delta:-state.lossDelta; const after=Math.max(0,Number((before+change).toFixed(2))); state.matches.push({result,court:els.courtSelect.value,date:els.matchDate.value||new Date().toISOString().slice(0,10),cost:Number(els.costInput.value||0),notes:els.notes.value.trim(),before,after,change}); state.currentRating=after; els.costInput.value=''; els.notes.value=''; render(); }
