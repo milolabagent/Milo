@@ -534,6 +534,8 @@
         if (error) { alert('Connexion impossible : ' + error.message); return; }
         els.authModal.classList.remove('open');
         await refreshAuthUI();
+      } catch (err) {
+        alert('Connexion impossible : ' + err.message);
       } finally {
         els.loginSubmit.disabled = false;
         els.loginSubmit.textContent = originalText;
