@@ -182,7 +182,7 @@
     </div>
   </main>
 
-  <div class="modal" id="authModal"><div class="sheet"><div class="auth-switch"><button class="btn primary" id="showLogin">Se connecter</button><button class="btn" id="showSignup">Créer un compte</button></div><div id="loginPanel"><h3 style="margin:0 0 8px">Connexion</h3><p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p><div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div><div style="margin-top:10px"><label style="display:flex;align-items:center;gap:10px;color:var(--text);font-size:14px;"><input id="rememberMe" type="checkbox" checked style="width:auto" />Rester connecté</label></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div></div><div id="signupPanel" class="hidden"><h3 style="margin:0 0 8px">Créer un compte</h3><p class="muted">Une fois créé, ton espace reste lié à ton email.</p><div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div></div></div></div>
+  <div class="modal" id="authModal"><div class="sheet"><div class="auth-switch"><button class="btn primary" id="showLogin">Se connecter</button><button class="btn" id="showSignup">Créer un compte</button></div><div id="loginPanel"><h3 style="margin:0 0 8px">Connexion</h3><p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p><div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div></div><div id="signupPanel" class="hidden"><h3 style="margin:0 0 8px">Créer un compte</h3><p class="muted">Une fois créé, ton espace reste lié à ton email.</p><div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div></div></div></div>
   <div class="modal" id="courtModal"><div class="sheet"><div class="sheet-photo" id="modalPhoto"></div><h3 id="modalTitle" style="margin:0 0 8px"></h3><p id="modalAddress"></p><p id="modalDesc"></p><div class="sheet-actions"><button class="btn" id="closeModal">Fermer</button><a class="btn primary" id="mapsLink" target="_blank">Ouvrir dans Maps</a></div></div></div>
   <div class="bottom-nav hidden" id="bottomNav"><div class="inner"><button class="nav-btn active" data-view="home">Accueil</button><button class="nav-btn" data-view="courts">Terrains</button><button class="nav-btn" data-view="level">Niveau</button><button class="nav-btn" data-view="events">Événements</button></div></div>
 
@@ -191,7 +191,6 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5dWpva3llYW5iem56cnJvaWdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1Njk4OTksImV4cCI6MjA4OTE0NTg5OX0.eg9ci6hUnfozuPJWLFon-rYOyPTwm6CzcINb_ao8zrU';
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const APP_KEY = 'padelstats-user-state-v1';
-    const REMEMBER_KEY = 'padelstats-remember-me';
     const courtDetails = [
       {name:'AirPad La Praille',address:'Secteur La Praille, Genève',photo:'AirPad La Praille',desc:'Complexe moderne pensé pour un usage urbain rapide.'},
       {name:'AirPad Les Acacias',address:'Les Acacias, Genève',photo:'AirPad Les Acacias',desc:'Spot pratique côté ville pour les matchs après le travail.'},
@@ -207,7 +206,7 @@
     const els = {
       publicLanding: $('publicLanding'), appArea: $('appArea'), bottomNav: $('bottomNav'), heroTitle: $('hero-title'), heroLead: $('hero-lead'), openAuth: $('openAuth'), logoutBtn: $('logoutBtn'), authStatus: $('authStatus'), ctaCreateAccount: $('ctaCreateAccount'), ctaLogin: $('ctaLogin'),
       ratingValue: $('ratingValue'), ratingDelta: $('ratingDelta'), progressBar: $('progressBar'), statMatches: $('statMatches'), statWinRate: $('statWinRate'), statSpent: $('statSpent'), favShort: $('favShort'), historyList: $('historyList'), allCourts: $('allCourts'), courtSelect: $('courtSelect'), startRating: $('startRating'), matchDate: $('matchDate'), costInput: $('costInput'), notes: $('notes'), quickWin: $('quickWin'), quickLoss: $('quickLoss'),
-      authModal: $('authModal'), showLogin: $('showLogin'), showSignup: $('showSignup'), loginPanel: $('loginPanel'), signupPanel: $('signupPanel'), closeAuth: $('closeAuth'), closeAuth2: $('closeAuth2'), loginEmail: $('loginEmail'), loginPassword: $('loginPassword'), rememberMe: $('rememberMe'), signupEmail: $('signupEmail'), signupPassword: $('signupPassword'), loginSubmit: $('loginSubmit'), signupSubmit: $('signupSubmit'),
+      authModal: $('authModal'), showLogin: $('showLogin'), showSignup: $('showSignup'), loginPanel: $('loginPanel'), signupPanel: $('signupPanel'), closeAuth: $('closeAuth'), closeAuth2: $('closeAuth2'), loginEmail: $('loginEmail'), loginPassword: $('loginPassword'), signupEmail: $('signupEmail'), signupPassword: $('signupPassword'), loginSubmit: $('loginSubmit'), signupSubmit: $('signupSubmit'),
       courtModal: $('courtModal'), modalPhoto: $('modalPhoto'), modalTitle: $('modalTitle'), modalAddress: $('modalAddress'), modalDesc: $('modalDesc'), mapsLink: $('mapsLink'), closeModal: $('closeModal'), quizLevelTitle: $('quizLevelTitle'), quizLevelText: $('quizLevelText'), applyEstimatedLevel: $('applyEstimatedLevel'), manualLevel: $('manualLevel'), saveManualLevel: $('saveManualLevel'), accountSummary: $('accountSummary'), goToLevel: $('goToLevel')
     };
 
@@ -495,9 +494,8 @@
     }
 
     async function refreshAuthUI() {
-      const remember = localStorage.getItem(REMEMBER_KEY) === 'true';
       const { data: { session } } = await supabaseClient.auth.getSession();
-      if (session?.user && remember) {
+      if (session?.user) {
         currentUser = session.user;
         try {
           await loadCloudState(session.user);
@@ -508,7 +506,6 @@
         }
         switchToAppMode(session.user);
       } else {
-        if (session?.user && !remember) await supabaseClient.auth.signOut();
         resetToPublicMode();
       }
     }
@@ -522,14 +519,13 @@
     els.closeAuth.onclick = () => els.authModal.classList.remove('open');
     els.closeAuth2.onclick = () => els.authModal.classList.remove('open');
     els.authModal.onclick = e => { if (e.target === els.authModal) els.authModal.classList.remove('open'); };
-    els.logoutBtn.onclick = async () => { localStorage.removeItem(REMEMBER_KEY); await supabaseClient.auth.signOut(); await refreshAuthUI(); };
+    els.logoutBtn.onclick = async () => { await supabaseClient.auth.signOut(); await refreshAuthUI(); };
 
     els.loginSubmit.onclick = async (e) => {
       if (e) e.preventDefault();
       const email = els.loginEmail.value.trim();
       const password = els.loginPassword.value;
       if (!email || !password) { alert('Entre ton email et ton mot de passe.'); return; }
-      localStorage.setItem(REMEMBER_KEY, (els.rememberMe && els.rememberMe.checked) ? 'true' : 'false');
       els.loginSubmit.disabled = true;
       const originalText = els.loginSubmit.textContent;
       els.loginSubmit.textContent = 'Connexion…';
