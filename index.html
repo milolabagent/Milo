@@ -382,6 +382,7 @@
       els.statSpent.textContent = Math.round(spent) + ' CHF';
       els.favShort.textContent = fav ? fav[0] : '—';
       els.startRating.value = state.startRating ? fmt(state.startRating) : '4.00';
+      if (!els.manualLevel.matches(':focus')) els.manualLevel.value = state.startRating ? fmt(state.startRating) : '';
       els.accountSummary.textContent = state.levelDefined
         ? `Niveau actuel : ${fmt(state.currentRating)} · ${state.matches.length} match(s) enregistré(s).`
         : 'Ton niveau n’est pas encore défini. Va dans l’onglet Niveau pour le fixer ou l’estimer.';
@@ -546,6 +547,15 @@
     els.quickLoss.onclick = () => addMatch('loss');
     els.applyEstimatedLevel.onclick = () => { if (state.estimatedLevel) defineLevel(state.estimatedLevel); };
     els.saveManualLevel.onclick = () => defineLevel(els.manualLevel.value);
+    els.manualLevel.addEventListener('change', () => {
+      const v = Number(els.manualLevel.value);
+      if (!v || Number.isNaN(v)) return;
+      state.startRating = v;
+      state.currentRating = v;
+      state.levelDefined = true;
+      saveCache();
+      renderStats();
+    });
     els.goToLevel.onclick = () => setView('level');
     document.querySelectorAll('#levelQuiz input').forEach(i => i.addEventListener('change', renderQuiz));
     els.closeModal.onclick = () => els.courtModal.classList.remove('open');
