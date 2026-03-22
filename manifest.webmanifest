@@ -1,7 +1,7 @@
 {
-  "name": "EloPad",
-  "short_name": "EloPad",
-  "description": "Suivi de niveau padel, matchs, coûts et terrains de Genève.",
+  "name": "PadelStats",
+  "short_name": "PadelStats",
+  "description": "Suivi de niveau padel, matchs, coûts et terrains.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#07111f",

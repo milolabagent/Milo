@@ -1,6 +1,6 @@
-# EloPad
+# PadelStats
 
-EloPad est une web app mobile-first pour suivre sa progression au padel :
+PadelStats est une web app mobile-first pour suivre sa progression au padel :
 - historique des matchs
 - évolution du niveau
 - coûts par partie
