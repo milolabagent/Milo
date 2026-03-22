@@ -524,17 +524,27 @@
     els.authModal.onclick = e => { if (e.target === els.authModal) els.authModal.classList.remove('open'); };
     els.logoutBtn.onclick = async () => { localStorage.removeItem(REMEMBER_KEY); await supabaseClient.auth.signOut(); await refreshAuthUI(); };
 
-    els.loginSubmit.onclick = async () => {
+    els.loginSubmit.onclick = async (e) => {
+      if (e) e.preventDefault();
       const email = els.loginEmail.value.trim();
       const password = els.loginPassword.value;
+      if (!email || !password) { alert('Entre ton email et ton mot de passe.'); return; }
       localStorage.setItem(REMEMBER_KEY, els.rememberMe.checked ? 'true' : 'false');
-      const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error) return alert('Connexion impossible : ' + error.message);
-      els.authModal.classList.remove('open');
-      await refreshAuthUI();
+      els.loginSubmit.disabled = true;
+      const originalText = els.loginSubmit.textContent;
+      els.loginSubmit.textContent = 'Connexion…';
+      try {
+        const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+        if (error) { alert('Connexion impossible : ' + error.message); return; }
+        els.authModal.classList.remove('open');
+        await refreshAuthUI();
+      } finally {
+        els.loginSubmit.disabled = false;
+        els.loginSubmit.textContent = originalText;
+      }
     };
 
-    els.signupSubmit.onclick = async () => {
+    els.signupSubmit.onclick = async (e) => { if (e) e.preventDefault();
       const email = els.signupEmail.value.trim();
       const password = els.signupPassword.value;
       const { error, data } = await supabaseClient.auth.signUp({ email, password });
