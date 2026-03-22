@@ -42,7 +42,7 @@
           <p class="lead" id="hero-lead">Crée ton compte, définis ton niveau, enregistre chaque partie et suis l’évolution de ton niveau, de tes coûts et de tes stats.</p>
         </div>
         <div class="hero-actions">
-          <button class="btn" id="openAuth">Se connecter</button>
+          <button class="btn" id="openAuth" onclick="openAuth('login')">Se connecter</button>
           <button class="btn primary hidden" id="logoutBtn">Se déconnecter</button>
         </div>
       </div>
@@ -57,8 +57,8 @@
             <h2 class="section-title" style="font-size:28px;margin-bottom:10px;">Une base neutre tant que tu n’es pas connecté</h2>
             <p class="lead" style="margin:0;max-width:none;">Quand tu arrives sur PadelStats sans session active, tu vois une page neutre : aucun niveau imposé, aucune statistique parasite, aucun historique d’un autre utilisateur.</p>
             <div class="hero-actions" style="margin-top:16px;">
-              <button class="btn primary" id="ctaCreateAccount">Créer un compte</button>
-              <button class="btn" id="ctaLogin">J’ai déjà un compte</button>
+              <button class="btn primary" id="ctaCreateAccount" onclick="openAuth('signup')">Créer un compte</button>
+              <button class="btn" id="ctaLogin" onclick="openAuth('login')">J’ai déjà un compte</button>
             </div>
           </div>
           <div class="intro-list">
@@ -182,7 +182,7 @@
     </div>
   </main>
 
-  <div class="modal" id="authModal"><div class="sheet"><div class="auth-switch"><button class="btn primary" id="showLogin">Se connecter</button><button class="btn" id="showSignup">Créer un compte</button></div><div id="loginPanel"><h3 style="margin:0 0 8px">Connexion</h3><p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p><div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div><div style="margin-top:10px"><label style="display:flex;align-items:center;gap:10px;color:var(--text);font-size:14px;"><input id="rememberMe" type="checkbox" checked style="width:auto" />Rester connecté</label></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div></div><div id="signupPanel" class="hidden"><h3 style="margin:0 0 8px">Créer un compte</h3><p class="muted">Une fois créé, ton espace reste lié à ton email.</p><div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div></div></div></div>
+  <div class="modal" id="authModal"><div class="sheet"><div class="auth-switch"><button class="btn primary" id="showLogin" onclick="openAuth('login')">Se connecter</button><button class="btn" id="showSignup" onclick="openAuth('signup')">Créer un compte</button></div><div id="loginPanel"><h3 style="margin:0 0 8px">Connexion</h3><p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p><div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div><div style="margin-top:10px"><label style="display:flex;align-items:center;gap:10px;color:var(--text);font-size:14px;"><input id="rememberMe" type="checkbox" checked style="width:auto" />Rester connecté</label></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div></div><div id="signupPanel" class="hidden"><h3 style="margin:0 0 8px">Créer un compte</h3><p class="muted">Une fois créé, ton espace reste lié à ton email.</p><div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div></div></div></div>
   <div class="modal" id="courtModal"><div class="sheet"><div class="sheet-photo" id="modalPhoto"></div><h3 id="modalTitle" style="margin:0 0 8px"></h3><p id="modalAddress"></p><p id="modalDesc"></p><div class="sheet-actions"><button class="btn" id="closeModal">Fermer</button><a class="btn primary" id="mapsLink" target="_blank">Ouvrir dans Maps</a></div></div></div>
   <div class="bottom-nav hidden" id="bottomNav"><div class="inner"><button class="nav-btn active" data-view="home">Accueil</button><button class="nav-btn" data-view="courts">Terrains</button><button class="nav-btn" data-view="level">Niveau</button><button class="nav-btn" data-view="events">Événements</button></div></div>
 
@@ -812,11 +812,6 @@
     }
 
     document.querySelectorAll('[data-view]').forEach(btn => btn.addEventListener('click', () => setView(btn.dataset.view)));
-    els.openAuth.onclick = () => openAuth('login');
-    els.ctaCreateAccount.onclick = () => openAuth('signup');
-    els.ctaLogin.onclick = () => openAuth('login');
-    els.showLogin.onclick = () => openAuth('login');
-    els.showSignup.onclick = () => openAuth('signup');
     els.closeAuth.onclick = () => els.authModal.classList.remove('open');
     els.closeAuth2.onclick = () => els.authModal.classList.remove('open');
     els.authModal.onclick = e => { if (e.target === els.authModal) els.authModal.classList.remove('open'); };
