@@ -9,75 +9,24 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <title>PadelStats</title>
   <style>
-    :root {
-      --bg:#08101c;
-      --bg2:#0d1728;
-      --panel:rgba(18,29,50,.88);
-      --panel2:rgba(25,39,67,.96);
-      --line:rgba(255,255,255,.08);
-      --text:#f5f8ff;
-      --muted:#a8b7d7;
-      --accent:#6ba8ff;
-      --accent2:#8d7cff;
-      --success:#20d98d;
-      --danger:#ff6678;
-      --gold:#ffd76a;
-      --shadow:0 18px 50px rgba(0,0,0,.35);
-    }
+    :root {--bg:#08101c;--bg2:#0d1728;--panel:rgba(18,29,50,.88);--panel2:rgba(25,39,67,.96);--line:rgba(255,255,255,.08);--text:#f5f8ff;--muted:#a8b7d7;--accent:#6ba8ff;--accent2:#8d7cff;--success:#20d98d;--danger:#ff6678;--gold:#ffd76a;--shadow:0 18px 50px rgba(0,0,0,.35)}
     *{box-sizing:border-box} html,body{margin:0;padding:0}
-    body{
-      min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(107,168,255,.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(141,124,255,.14), transparent 24%),
-        linear-gradient(180deg,var(--bg) 0%,#09111d 35%,var(--bg2) 100%);
-    }
-    .shell{max-width:1180px;margin:0 auto;padding:18px 14px 100px}
-    .glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(16px);border-radius:26px}
-    .hidden{display:none!important}
-    .hero{padding:22px;margin-bottom:16px}
-    .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
-    .eyebrow{display:inline-flex;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--accent);font-size:12px;font-weight:700;background:rgba(255,255,255,.04)}
-    h1{margin:14px 0 0;font-size:44px;line-height:1.02;letter-spacing:-.04em}
-    .lead{color:var(--muted);font-size:16px;line-height:1.55;margin:12px 0 0;max-width:56ch}
-    .hero-actions,.sheet-actions,.stat-actions{display:flex;gap:10px;flex-wrap:wrap}
-    .btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer;text-decoration:none}
-    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0}
-    .btn.success{background:linear-gradient(135deg,#22d38c,#0ea96a);border:0}
-    .btn.danger{background:rgba(255,102,120,.14);color:#ffd7dd}
-    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
-    .tab{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);border-radius:18px;padding:12px 10px;font-weight:700;cursor:pointer}
-    .tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-    .view{display:none}.view.active{display:block}
-    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
-    .stack{display:grid;gap:14px}
-    .section{padding:16px}
-    .title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
-    .section-title{margin:0;font-size:18px;font-weight:800}.subtle{color:var(--muted);font-size:12px}
-    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .kpi,.panel,.match,.level-card,.court-card,.event-card,.auth-card{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:14px}
-    .kpi small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.kpi strong{font-size:22px}
-    .rating{display:grid;grid-template-columns:1fr;gap:12px}.big{font-size:48px;font-weight:900;letter-spacing:-.05em}.muted{color:var(--muted)}
-    .bar{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:40%}
-    .form-grid{display:grid;gap:10px}.row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}
-    input,select{width:100%;background:#0d1730;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit}
-    .list{display:grid;gap:6px}
-    .match{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:9px 10px}
-    .badge{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;font-size:15px;font-weight:900}
-    .badge.win{color:#59efb2;background:rgba(32,217,141,.14)} .badge.loss{color:#ff9fab;background:rgba(255,102,120,.14)}
+    body{min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at top left, rgba(107,168,255,.16), transparent 28%),radial-gradient(circle at top right, rgba(141,124,255,.14), transparent 24%),linear-gradient(180deg,var(--bg) 0%,#09111d 35%,var(--bg2) 100%)}
+    .shell{max-width:1180px;margin:0 auto;padding:18px 14px 100px}.glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(16px);border-radius:26px}.hidden{display:none!important}
+    .hero{padding:22px;margin-bottom:16px}.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}.eyebrow{display:inline-flex;padding:8px 12px;border:1px solid var(--line);border-radius:999px;color:var(--accent);font-size:12px;font-weight:700;background:rgba(255,255,255,.04)}
+    h1{margin:14px 0 0;font-size:44px;line-height:1.02;letter-spacing:-.04em}.lead{color:var(--muted);font-size:16px;line-height:1.55;margin:12px 0 0;max-width:56ch}.hero-actions,.sheet-actions,.stat-actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:14px;padding:12px 14px;font-weight:700;cursor:pointer;text-decoration:none}.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0}.btn.success{background:linear-gradient(135deg,#22d38c,#0ea96a);border:0}.btn.danger{background:rgba(255,102,120,.14);color:#ffd7dd}
+    .tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}.tab{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);border-radius:18px;padding:12px 10px;font-weight:700;cursor:pointer}.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
+    .view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.stack{display:grid;gap:14px}.section{padding:16px}.title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}.section-title{margin:0;font-size:18px;font-weight:800}.subtle{color:var(--muted);font-size:12px}
+    .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.kpi,.panel,.match,.level-card,.court-card,.event-card,.auth-card{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:14px}.kpi small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.kpi strong{font-size:22px}
+    .rating{display:grid;grid-template-columns:1fr;gap:12px}.big{font-size:48px;font-weight:900;letter-spacing:-.05em}.muted{color:var(--muted)}.bar{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:4%}
+    .form-grid{display:grid;gap:10px}.row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}input,select{width:100%;background:#0d1730;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit}
+    .list{display:grid;gap:6px}.match{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;padding:9px 10px}.badge{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;font-size:15px;font-weight:900}.badge.win{color:#59efb2;background:rgba(32,217,141,.14)} .badge.loss{color:#ff9fab;background:rgba(255,102,120,.14)}
     .match-title{font-weight:800;font-size:12px}.match-meta,.tiny{color:var(--muted);font-size:10px;margin-top:2px;line-height:1.3}.delta{font-weight:900;font-size:12px}.pos{color:#59efb2}.neg{color:#ff9fab}
-    .courts,.events{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .court-card{cursor:pointer;padding:0;overflow:hidden}.court-photo{height:140px;background:linear-gradient(135deg,#27466f,#1a2b4a);display:flex;align-items:end;padding:12px;font-weight:800}.court-body{padding:14px}.court-name,.event-title{font-weight:800}.court-meta,.event-meta{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
-    .event-chip{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(107,168,255,.12);color:var(--accent);font-size:11px;font-weight:700;margin-bottom:10px}
-    .level-grid{display:grid;gap:10px}.level-card strong{display:block;margin-bottom:6px}.level-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
-    .quiz{display:grid;gap:12px;margin-bottom:14px}.quiz-card{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px}.quiz-card h3{margin:0 0 10px;font-size:15px}.quiz-options{display:grid;gap:8px}.quiz-options label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--text)}.quiz-options label.selected{border-color:rgba(107,168,255,.45);background:linear-gradient(135deg, rgba(107,168,255,.14), rgba(141,124,255,.12));box-shadow:0 10px 24px rgba(0,0,0,.18)}.quiz-options input{width:auto;transform:translateY(2px);accent-color:#6ba8ff}.quiz-result{background:rgba(107,168,255,.10);border:1px solid rgba(107,168,255,.18);border-radius:18px;padding:12px;margin-bottom:12px}
+    .courts,.events{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.court-card{cursor:pointer;padding:0;overflow:hidden}.court-photo{height:140px;background:linear-gradient(135deg,#27466f,#1a2b4a);display:flex;align-items:end;padding:12px;font-weight:800}.court-body{padding:14px}.court-name,.event-title{font-weight:800}.court-meta,.event-meta{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}.event-chip{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(107,168,255,.12);color:var(--accent);font-size:11px;font-weight:700;margin-bottom:10px}
+    .level-grid{display:grid;gap:10px}.level-card strong{display:block;margin-bottom:6px}.level-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}.quiz{display:grid;gap:12px;margin-bottom:14px}.quiz-card{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px}.quiz-card h3{margin:0 0 10px;font-size:15px}.quiz-options{display:grid;gap:8px}.quiz-options label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--text)}.quiz-options label.selected{border-color:rgba(107,168,255,.45);background:linear-gradient(135deg, rgba(107,168,255,.14), rgba(141,124,255,.12));box-shadow:0 10px 24px rgba(0,0,0,.18)}.quiz-options input{width:auto;transform:translateY(2px);accent-color:#6ba8ff}.quiz-result{background:rgba(107,168,255,.10);border:1px solid rgba(107,168,255,.18);border-radius:18px;padding:12px;margin-bottom:12px}
     .modal{position:fixed;inset:0;background:rgba(5,9,18,.72);display:none;align-items:end;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.sheet{max-width:540px;width:100%;background:#101a31;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}.sheet-photo{height:180px;border-radius:18px;background:linear-gradient(135deg,#31578b,#1d2e4d);margin-bottom:12px;padding:12px;display:flex;align-items:end;font-weight:900}.sheet p{color:var(--muted);line-height:1.5}.auth-switch{display:flex;gap:8px;margin-bottom:8px}.auth-switch button{flex:1}.auth-status{font-size:12px;color:var(--gold)}
-    .onboarding{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-    .intro-list{display:grid;gap:10px;margin-top:14px}
-    .intro-item{padding:14px;border-radius:18px;background:var(--panel2);border:1px solid var(--line)}
-    .intro-item strong{display:block;margin-bottom:6px}
-    .welcome-box{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:22px}
+    .onboarding{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.intro-list{display:grid;gap:10px;margin-top:14px}.intro-item{padding:14px;border-radius:18px;background:var(--panel2);border:1px solid var(--line)}.intro-item strong{display:block;margin-bottom:6px}.welcome-box{padding:18px;background:var(--panel2);border:1px solid var(--line);border-radius:22px}
     .bottom-nav{position:fixed;left:0;right:0;bottom:0;padding:10px 14px 14px;background:linear-gradient(180deg,rgba(7,17,31,0),rgba(7,17,31,.88) 30%, rgba(7,17,31,.98) 100%)}.bottom-nav .inner{max-width:520px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.nav-btn{padding:12px 8px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;font-weight:700;cursor:pointer}.nav-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
     @media (max-width:899px){.shell{max-width:520px}.grid,.row-2,.courts,.kpis,.events,.onboarding{grid-template-columns:1fr}.tabs{display:none}h1{font-size:34px}}
   </style>
@@ -88,7 +37,7 @@
     <section class="hero glass">
       <div class="hero-top">
         <div>
-          <span class="eyebrow" id="brand-badge">PadelStats</span>
+          <span class="eyebrow">PadelStats</span>
           <h1 id="hero-title">Suis ta progression padel, simplement.</h1>
           <p class="lead" id="hero-lead">Crée ton compte, définis ton niveau, enregistre chaque partie et suis l’évolution de ton niveau, de tes coûts et de tes stats.</p>
         </div>
@@ -124,7 +73,7 @@
             <div class="level-grid">
               <article class="level-card"><strong>Suivi des matchs</strong><p>Après chaque partie, tu ajoutes le résultat, le coût et le terrain.</p></article>
               <article class="level-card"><strong>Niveau estimé ou choisi</strong><p>Tu peux entrer ton niveau manuellement ou utiliser le questionnaire d’estimation.</p></article>
-              <article class="level-card"><strong>Stats personnelles</strong><p>Tu retrouves tes chiffres dès que tu te reconnectes avec ton compte.</p></article>
+              <article class="level-card"><strong>Stats personnelles</strong><p>Tu retrouves tes chiffres dès que tu te reconnectes à ton compte.</p></article>
             </div>
           </section>
         </div>
@@ -192,23 +141,18 @@
               </div>
             </section>
             <section class="section glass">
-              <div class="title-row"><h2 class="section-title">Logique produit</h2><span class="subtle">nouveau flux</span></div>
+              <div class="title-row"><h2 class="section-title">Flux produit</h2><span class="subtle">connecté au compte</span></div>
               <div class="level-grid">
-                <article class="level-card"><strong>Non connecté</strong><p>Accueil neutre, aucun historique affiché.</p></article>
-                <article class="level-card"><strong>Connecté</strong><p>Tu récupères tes statistiques liées à ton compte.</p></article>
-                <article class="level-card"><strong>Niveau inconnu</strong><p>Tu peux le définir manuellement ou passer par l’onglet Niveau.</p></article>
+                <article class="level-card"><strong>Non connecté</strong><p>Accueil neutre, aucune donnée personnelle affichée.</p></article>
+                <article class="level-card"><strong>Connecté</strong><p>Le profil, le niveau et les matchs sont récupérés depuis Supabase.</p></article>
+                <article class="level-card"><strong>Niveau inconnu</strong><p>Tu peux le définir manuellement ou le faire estimer avant de jouer.</p></article>
               </div>
             </section>
           </div>
         </div>
       </section>
 
-      <section id="view-courts" class="view">
-        <section class="section glass">
-          <div class="title-row"><h2 class="section-title">Terrains</h2><span class="subtle">adresse + photo</span></div>
-          <div class="courts" id="allCourts"></div>
-        </section>
-      </section>
+      <section id="view-courts" class="view"><section class="section glass"><div class="title-row"><h2 class="section-title">Terrains</h2><span class="subtle">adresse + photo</span></div><div class="courts" id="allCourts"></div></section></section>
 
       <section id="view-level" class="view">
         <section class="section glass">
@@ -216,19 +160,12 @@
           <div class="quiz-result">
             <strong id="quizLevelTitle">Estimation rapide</strong>
             <p id="quizLevelText">Réponds aux questions ci-dessous pour obtenir une estimation simple de ton niveau.</p>
-            <div class="hero-actions" style="margin-top:12px;">
-              <button class="btn primary" id="applyEstimatedLevel">Utiliser ce niveau</button>
-            </div>
+            <div class="hero-actions" style="margin-top:12px;"><button class="btn primary" id="applyEstimatedLevel">Utiliser ce niveau</button></div>
           </div>
           <div class="panel" style="margin-bottom:14px;">
             <div class="row-2">
-              <div>
-                <label for="manualLevel">Choisir manuellement mon niveau</label>
-                <input id="manualLevel" type="number" min="1" max="10" step="0.1" placeholder="Ex : 4.5" />
-              </div>
-              <div style="display:flex;align-items:end;">
-                <button class="btn primary" id="saveManualLevel">Enregistrer ce niveau</button>
-              </div>
+              <div><label for="manualLevel">Choisir manuellement mon niveau</label><input id="manualLevel" type="number" min="1" max="10" step="0.1" placeholder="Ex : 4.5" /></div>
+              <div style="display:flex;align-items:end;"><button class="btn primary" id="saveManualLevel">Enregistrer ce niveau</button></div>
             </div>
           </div>
           <div class="quiz" id="levelQuiz">
@@ -238,52 +175,15 @@
             <article class="quiz-card"><h3>4. Lecture tactique / placement</h3><div class="quiz-options"><label><input type="radio" name="q4" value="1"> Je joue surtout à l’instinct</label><label><input type="radio" name="q4" value="3"> Je commence à chercher les bonnes zones</label><label><input type="radio" name="q4" value="5"> Je construis les points de façon cohérente</label><label><input type="radio" name="q4" value="7"> Je varie selon les adversaires et les situations</label><label><input type="radio" name="q4" value="9"> Je lis très bien le match et j’impose un plan</label></div></article>
             <article class="quiz-card"><h3>5. Niveau général ressenti</h3><div class="quiz-options"><label><input type="radio" name="q5" value="2"> Débutant / loisir occasionnel</label><label><input type="radio" name="q5" value="4"> Élémentaire à intermédiaire</label><label><input type="radio" name="q5" value="6"> Confirmé / bon joueur club</label><label><input type="radio" name="q5" value="8"> Avancé / expert club</label><label><input type="radio" name="q5" value="10"> Très haut niveau / compétition forte</label></div></article>
           </div>
-          <div class="level-grid">
-            <article class="level-card"><strong>1 à 3</strong><p>Découverte / progression initiale.</p></article>
-            <article class="level-card"><strong>4 à 6</strong><p>Intermédiaire / régularité qui s’installe.</p></article>
-            <article class="level-card"><strong>7 à 8</strong><p>Avancé / bonne lecture du jeu.</p></article>
-            <article class="level-card"><strong>9 à 10</strong><p>Très haut niveau / forte maîtrise tactique et technique.</p></article>
-          </div>
         </section>
       </section>
 
-      <section id="view-events" class="view">
-        <section class="section glass">
-          <div class="title-row"><h2 class="section-title">Événements</h2><span class="subtle">piste produit</span></div>
-          <div class="events">
-            <article class="event-card"><div class="event-chip">À connecter</div><div class="event-title">Clubs & tournois</div><div class="event-meta">Centraliser les événements des clubs pour enrichir l’écosystème PadelStats.</div></article>
-            <article class="event-card"><div class="event-chip">Étape suivante</div><div class="event-title">Version plus riche</div><div class="event-meta">Commencer simple, puis connecter des événements terrain par terrain.</div></article>
-          </div>
-        </section>
-      </section>
+      <section id="view-events" class="view"><section class="section glass"><div class="title-row"><h2 class="section-title">Événements</h2><span class="subtle">piste produit</span></div><div class="events"><article class="event-card"><div class="event-chip">À connecter</div><div class="event-title">Clubs & tournois</div><div class="event-meta">Centraliser les événements des clubs pour enrichir l’écosystème PadelStats.</div></article><article class="event-card"><div class="event-chip">Étape suivante</div><div class="event-title">Version plus riche</div><div class="event-meta">Commencer simple, puis connecter des événements terrain par terrain.</div></article></div></section></section>
     </div>
   </main>
 
-  <div class="modal" id="authModal">
-    <div class="sheet">
-      <div class="auth-switch">
-        <button class="btn primary" id="showLogin">Se connecter</button>
-        <button class="btn" id="showSignup">Créer un compte</button>
-      </div>
-      <div id="loginPanel">
-        <h3 style="margin:0 0 8px">Connexion</h3>
-        <p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p>
-        <div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div>
-        <div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div>
-        <div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div>
-      </div>
-      <div id="signupPanel" class="hidden">
-        <h3 style="margin:0 0 8px">Créer un compte</h3>
-        <p class="muted">Une fois créé, ton espace reste lié à ton email.</p>
-        <div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div>
-        <div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div>
-        <div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div>
-      </div>
-    </div>
-  </div>
-
+  <div class="modal" id="authModal"><div class="sheet"><div class="auth-switch"><button class="btn primary" id="showLogin">Se connecter</button><button class="btn" id="showSignup">Créer un compte</button></div><div id="loginPanel"><h3 style="margin:0 0 8px">Connexion</h3><p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p><div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div></div><div id="signupPanel" class="hidden"><h3 style="margin:0 0 8px">Créer un compte</h3><p class="muted">Une fois créé, ton espace reste lié à ton email.</p><div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div></div></div></div>
   <div class="modal" id="courtModal"><div class="sheet"><div class="sheet-photo" id="modalPhoto"></div><h3 id="modalTitle" style="margin:0 0 8px"></h3><p id="modalAddress"></p><p id="modalDesc"></p><div class="sheet-actions"><button class="btn" id="closeModal">Fermer</button><a class="btn primary" id="mapsLink" target="_blank">Ouvrir dans Maps</a></div></div></div>
-
   <div class="bottom-nav hidden" id="bottomNav"><div class="inner"><button class="nav-btn active" data-view="home">Accueil</button><button class="nav-btn" data-view="courts">Terrains</button><button class="nav-btn" data-view="level">Niveau</button><button class="nav-btn" data-view="events">Événements</button></div></div>
 
   <script>
@@ -301,98 +201,144 @@
       {name:'Bernex',address:'Bernex, Genève',photo:'Bernex',desc:'Base terrain complémentaire côté Bernex.'},
       {name:'Les Évaux',address:'Chemin François-Chavaz, Onex / Les Évaux',photo:'Les Évaux',desc:'Référence forte dans la zone Genève / Onex.'}
     ];
-
-    const defaultState = {
-      currentRating: null,
-      startRating: null,
-      delta: 0.03,
-      lossDelta: 0.05,
-      matches: [],
-      courts: courtDetails.map(c => c.name),
-      levelDefined: false,
-      estimatedLevel: null
-    };
-
+    const defaultState = { currentRating: null, startRating: null, delta: 0.03, lossDelta: 0.05, matches: [], courts: courtDetails.map(c => c.name), levelDefined: false, estimatedLevel: null };
     const $ = id => document.getElementById(id);
     const els = {
-      publicLanding: $('publicLanding'),
-      appArea: $('appArea'),
-      bottomNav: $('bottomNav'),
-      heroTitle: $('hero-title'),
-      heroLead: $('hero-lead'),
-      openAuth: $('openAuth'),
-      logoutBtn: $('logoutBtn'),
-      authStatus: $('authStatus'),
-      ctaCreateAccount: $('ctaCreateAccount'),
-      ctaLogin: $('ctaLogin'),
-      ratingValue: $('ratingValue'), ratingDelta: $('ratingDelta'), progressBar: $('progressBar'),
-      statMatches: $('statMatches'), statWinRate: $('statWinRate'), statSpent: $('statSpent'), favShort: $('favShort'),
-      historyList: $('historyList'), allCourts: $('allCourts'), courtSelect: $('courtSelect'),
-      startRating: $('startRating'), matchDate: $('matchDate'), costInput: $('costInput'), notes: $('notes'),
-      quickWin: $('quickWin'), quickLoss: $('quickLoss'),
-      authModal: $('authModal'), showLogin: $('showLogin'), showSignup: $('showSignup'),
-      loginPanel: $('loginPanel'), signupPanel: $('signupPanel'), closeAuth: $('closeAuth'), closeAuth2: $('closeAuth2'),
-      loginEmail: $('loginEmail'), loginPassword: $('loginPassword'), signupEmail: $('signupEmail'), signupPassword: $('signupPassword'),
-      loginSubmit: $('loginSubmit'), signupSubmit: $('signupSubmit'),
-      courtModal: $('courtModal'), modalPhoto: $('modalPhoto'), modalTitle: $('modalTitle'), modalAddress: $('modalAddress'), modalDesc: $('modalDesc'), mapsLink: $('mapsLink'), closeModal: $('closeModal'),
-      quizLevelTitle: $('quizLevelTitle'), quizLevelText: $('quizLevelText'), applyEstimatedLevel: $('applyEstimatedLevel'), manualLevel: $('manualLevel'), saveManualLevel: $('saveManualLevel'),
-      accountSummary: $('accountSummary'), goToLevel: $('goToLevel')
+      publicLanding: $('publicLanding'), appArea: $('appArea'), bottomNav: $('bottomNav'), heroTitle: $('hero-title'), heroLead: $('hero-lead'), openAuth: $('openAuth'), logoutBtn: $('logoutBtn'), authStatus: $('authStatus'), ctaCreateAccount: $('ctaCreateAccount'), ctaLogin: $('ctaLogin'),
+      ratingValue: $('ratingValue'), ratingDelta: $('ratingDelta'), progressBar: $('progressBar'), statMatches: $('statMatches'), statWinRate: $('statWinRate'), statSpent: $('statSpent'), favShort: $('favShort'), historyList: $('historyList'), allCourts: $('allCourts'), courtSelect: $('courtSelect'), startRating: $('startRating'), matchDate: $('matchDate'), costInput: $('costInput'), notes: $('notes'), quickWin: $('quickWin'), quickLoss: $('quickLoss'),
+      authModal: $('authModal'), showLogin: $('showLogin'), showSignup: $('showSignup'), loginPanel: $('loginPanel'), signupPanel: $('signupPanel'), closeAuth: $('closeAuth'), closeAuth2: $('closeAuth2'), loginEmail: $('loginEmail'), loginPassword: $('loginPassword'), signupEmail: $('signupEmail'), signupPassword: $('signupPassword'), loginSubmit: $('loginSubmit'), signupSubmit: $('signupSubmit'),
+      courtModal: $('courtModal'), modalPhoto: $('modalPhoto'), modalTitle: $('modalTitle'), modalAddress: $('modalAddress'), modalDesc: $('modalDesc'), mapsLink: $('mapsLink'), closeModal: $('closeModal'), quizLevelTitle: $('quizLevelTitle'), quizLevelText: $('quizLevelText'), applyEstimatedLevel: $('applyEstimatedLevel'), manualLevel: $('manualLevel'), saveManualLevel: $('saveManualLevel'), accountSummary: $('accountSummary'), goToLevel: $('goToLevel')
     };
 
     let state = { ...defaultState };
     let currentUser = null;
+    let syncError = null;
 
-    function userStorageKey(uid) {
-      return `${APP_KEY}:${uid}`;
-    }
-
-    function fmt(n) {
-      return Number(n).toFixed(2);
-    }
-
+    function userStorageKey(uid) { return `${APP_KEY}:${uid}`; }
+    function fmt(n) { return Number(n).toFixed(2); }
     function setView(view) {
       document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + view));
       document.querySelectorAll('[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === view));
     }
-
     function getStoredState(uid) {
-      try {
-        return { ...defaultState, ...JSON.parse(localStorage.getItem(userStorageKey(uid)) || '{}') };
-      } catch {
-        return { ...defaultState };
-      }
+      try { return { ...defaultState, ...JSON.parse(localStorage.getItem(userStorageKey(uid)) || '{}') }; }
+      catch { return { ...defaultState }; }
+    }
+    function saveCache() { if (currentUser) localStorage.setItem(userStorageKey(currentUser.id), JSON.stringify(state)); }
+
+    async function ensureProfile(user) {
+      const { data: profile, error } = await supabaseClient.from('profiles').select('*').eq('id', user.id).maybeSingle();
+      if (error) throw error;
+      if (profile) return profile;
+
+      const cached = getStoredState(user.id);
+      const payload = {
+        id: user.id,
+        email: user.email,
+        start_rating: cached.startRating,
+        current_rating: cached.currentRating,
+        delta: cached.delta,
+        loss_delta: cached.lossDelta,
+        level_defined: !!cached.levelDefined
+      };
+      const { data, error: insertError } = await supabaseClient.from('profiles').insert(payload).select('*').single();
+      if (insertError) throw insertError;
+      return data;
     }
 
-    function saveState() {
+    async function loadCloudState(user) {
+      const profile = await ensureProfile(user);
+      const { data: matches, error } = await supabaseClient.from('matches').select('*').eq('user_id', user.id).order('match_date', { ascending: true }).order('id', { ascending: true });
+      if (error) throw error;
+      state = {
+        ...defaultState,
+        startRating: profile.start_rating,
+        currentRating: profile.current_rating,
+        delta: Number(profile.delta ?? 0.03),
+        lossDelta: Number(profile.loss_delta ?? 0.05),
+        levelDefined: !!profile.level_defined,
+        matches: (matches || []).map(m => ({
+          result: m.result,
+          court: m.court,
+          date: m.match_date,
+          cost: Number(m.cost || 0),
+          notes: m.notes || '',
+          before: Number(m.before_rating),
+          after: Number(m.after_rating),
+          change: Number(m.rating_change)
+        }))
+      };
+      saveCache();
+    }
+
+    async function saveProfile() {
       if (!currentUser) return;
-      localStorage.setItem(userStorageKey(currentUser.id), JSON.stringify(state));
+      const payload = {
+        email: currentUser.email,
+        start_rating: state.startRating,
+        current_rating: state.currentRating,
+        delta: state.delta,
+        loss_delta: state.lossDelta,
+        level_defined: !!state.levelDefined,
+        updated_at: new Date().toISOString()
+      };
+      const { error } = await supabaseClient.from('profiles').upsert({ id: currentUser.id, ...payload });
+      if (error) throw error;
+    }
+
+    async function insertMatch(match) {
+      if (!currentUser) return;
+      const payload = {
+        user_id: currentUser.id,
+        result: match.result,
+        court: match.court,
+        match_date: match.date,
+        cost: match.cost,
+        notes: match.notes,
+        before_rating: match.before,
+        after_rating: match.after,
+        rating_change: match.change
+      };
+      const { error } = await supabaseClient.from('matches').insert(payload);
+      if (error) throw error;
+    }
+
+    function updateAuthBanner() {
+      if (syncError) {
+        els.authStatus.style.display = 'block';
+        els.authStatus.textContent = `Connecté : ${currentUser?.email || ''} — souci Supabase : ${syncError}`;
+      } else if (currentUser) {
+        els.authStatus.style.display = 'block';
+        els.authStatus.textContent = `Connecté : ${currentUser.email}`;
+      } else {
+        els.authStatus.style.display = 'none';
+      }
     }
 
     function resetToPublicMode() {
       currentUser = null;
+      syncError = null;
       state = { ...defaultState };
       els.publicLanding.classList.remove('hidden');
       els.appArea.classList.add('hidden');
       els.bottomNav.classList.add('hidden');
       els.openAuth.classList.remove('hidden');
       els.logoutBtn.classList.add('hidden');
-      els.authStatus.style.display = 'none';
       els.heroTitle.textContent = 'Suis ta progression padel, simplement.';
       els.heroLead.textContent = 'Crée ton compte, définis ton niveau, enregistre chaque partie et suis l’évolution de ton niveau, de tes coûts et de tes stats.';
+      updateAuthBanner();
     }
 
     function switchToAppMode(user) {
       currentUser = user;
-      state = getStoredState(user.id);
       els.publicLanding.classList.add('hidden');
       els.appArea.classList.remove('hidden');
       els.bottomNav.classList.remove('hidden');
       els.openAuth.classList.add('hidden');
       els.logoutBtn.classList.remove('hidden');
-      els.authStatus.style.display = 'block';
-      els.authStatus.textContent = `Connecté : ${user.email}`;
       els.heroTitle.textContent = 'PadelStats — ton espace personnel.';
       els.heroLead.textContent = 'Retrouve ton niveau, tes matchs, tes coûts et ton historique dès que tu te reconnectes.';
+      updateAuthBanner();
       render();
     }
 
@@ -400,11 +346,7 @@
       els.courtSelect.innerHTML = '';
       els.allCourts.innerHTML = '';
       courtDetails.forEach(c => {
-        const o = document.createElement('option');
-        o.value = c.name;
-        o.textContent = c.name;
-        els.courtSelect.appendChild(o);
-
+        const o = document.createElement('option'); o.value = c.name; o.textContent = c.name; els.courtSelect.appendChild(o);
         const card = document.createElement('article');
         card.className = 'court-card';
         card.innerHTML = `<div class="court-photo">${c.photo}</div><div class="court-body"><div class="court-name">${c.name}</div><div class="court-meta">${c.address}</div></div>`;
@@ -414,10 +356,7 @@
     }
 
     function openCourt(c) {
-      els.modalPhoto.textContent = c.photo;
-      els.modalTitle.textContent = c.name;
-      els.modalAddress.textContent = c.address;
-      els.modalDesc.textContent = c.desc;
+      els.modalPhoto.textContent = c.photo; els.modalTitle.textContent = c.name; els.modalAddress.textContent = c.address; els.modalDesc.textContent = c.desc;
       els.mapsLink.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(c.address);
       els.courtModal.classList.add('open');
     }
@@ -429,7 +368,6 @@
       const counts = {};
       state.matches.forEach(m => counts[m.court] = (counts[m.court] || 0) + 1);
       const fav = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-
       els.ratingValue.textContent = state.currentRating ? fmt(state.currentRating) : '—';
       if (state.currentRating && state.startRating) {
         const diff = state.currentRating - state.startRating;
@@ -439,7 +377,6 @@
         els.ratingDelta.textContent = 'définis ton niveau pour commencer';
         els.progressBar.style.width = '4%';
       }
-
       els.statMatches.textContent = state.matches.length;
       els.statWinRate.textContent = rate + '%';
       els.statSpent.textContent = Math.round(spent) + ' CHF';
@@ -485,18 +422,25 @@
       els.quizLevelText.textContent = 'Tu peux utiliser cette estimation directement comme niveau de départ.';
     }
 
-    function defineLevel(level) {
+    async function defineLevel(level) {
       const numeric = Number(level);
       if (!numeric || Number.isNaN(numeric)) return;
       state.startRating = numeric;
       state.currentRating = numeric;
       state.levelDefined = true;
-      saveState();
+      saveCache();
+      try {
+        await saveProfile();
+        syncError = null;
+      } catch (error) {
+        syncError = error.message;
+      }
+      updateAuthBanner();
       render();
       setView('home');
     }
 
-    function addMatch(result) {
+    async function addMatch(result) {
       if (!state.levelDefined || !state.currentRating) {
         alert('Définis d’abord ton niveau avant d’enregistrer un match.');
         setView('level');
@@ -505,7 +449,7 @@
       const before = state.currentRating;
       const change = result === 'win' ? state.delta : -state.lossDelta;
       const after = Math.max(0, Number((before + change).toFixed(2)));
-      state.matches.push({
+      const match = {
         result,
         court: els.courtSelect.value,
         date: els.matchDate.value || new Date().toISOString().slice(0, 10),
@@ -514,11 +458,20 @@
         before,
         after,
         change
-      });
+      };
+      state.matches.push(match);
       state.currentRating = after;
       els.costInput.value = '';
       els.notes.value = '';
-      saveState();
+      saveCache();
+      try {
+        await insertMatch(match);
+        await saveProfile();
+        syncError = null;
+      } catch (error) {
+        syncError = error.message;
+      }
+      updateAuthBanner();
       render();
     }
 
@@ -527,7 +480,7 @@
       renderStats();
       renderHistory();
       renderQuiz();
-      saveState();
+      saveCache();
     }
 
     function openAuth(mode = 'login') {
@@ -542,6 +495,14 @@
     async function refreshAuthUI() {
       const { data: { session } } = await supabaseClient.auth.getSession();
       if (session?.user) {
+        currentUser = session.user;
+        try {
+          await loadCloudState(session.user);
+          syncError = null;
+        } catch (error) {
+          state = getStoredState(session.user.id);
+          syncError = error.message;
+        }
         switchToAppMode(session.user);
       } else {
         resetToPublicMode();
@@ -563,10 +524,7 @@
       const email = els.loginEmail.value.trim();
       const password = els.loginPassword.value;
       const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
-      if (error) {
-        alert('Connexion impossible : ' + error.message);
-        return;
-      }
+      if (error) return alert('Connexion impossible : ' + error.message);
       els.authModal.classList.remove('open');
       await refreshAuthUI();
     };
@@ -575,10 +533,7 @@
       const email = els.signupEmail.value.trim();
       const password = els.signupPassword.value;
       const { error, data } = await supabaseClient.auth.signUp({ email, password });
-      if (error) {
-        alert('Création impossible : ' + error.message);
-        return;
-      }
+      if (error) return alert('Création impossible : ' + error.message);
       els.authModal.classList.remove('open');
       if (data?.session?.user) {
         await refreshAuthUI();
@@ -589,14 +544,10 @@
 
     els.quickWin.onclick = () => addMatch('win');
     els.quickLoss.onclick = () => addMatch('loss');
-    els.applyEstimatedLevel.onclick = () => {
-      if (!state.estimatedLevel) return;
-      defineLevel(state.estimatedLevel);
-    };
+    els.applyEstimatedLevel.onclick = () => { if (state.estimatedLevel) defineLevel(state.estimatedLevel); };
     els.saveManualLevel.onclick = () => defineLevel(els.manualLevel.value);
     els.goToLevel.onclick = () => setView('level');
     document.querySelectorAll('#levelQuiz input').forEach(i => i.addEventListener('change', renderQuiz));
-
     els.closeModal.onclick = () => els.courtModal.classList.remove('open');
     els.courtModal.onclick = e => { if (e.target === els.courtModal) els.courtModal.classList.remove('open'); };
 

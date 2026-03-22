@@ -4,58 +4,40 @@ PadelStats est une web app mobile-first pour suivre sa progression au padel :
 - historique des matchs
 - évolution du niveau
 - coûts par partie
-- terrains de Genève
+- terrains
 - estimation du niveau via quiz
+- connexion utilisateur via Supabase
+- persistance des stats liée au compte
 
-## Structure
+## Fichiers principaux
 - `index.html` — application statique principale
-- `netlify.toml` — configuration Netlify
-- `.gitignore` — fichiers locaux à ignorer
 - `manifest.webmanifest` — base PWA
-- `icon.svg` — icône d’app
 - `favicon.svg` — favicon
+- `icon.svg` — icône d’app
+- `netlify.toml` — configuration Netlify
+- `supabase-schema.sql` — schéma SQL à exécuter dans Supabase
 
-## Déploiement GitHub + Netlify
+## Flux produit actuel
+1. utilisateur non connecté → accueil neutre
+2. création de compte ou connexion
+3. définition manuelle du niveau ou estimation via l’onglet Niveau
+4. enregistrement des matchs après chaque partie
+5. déconnexion → retour à l’accueil neutre
+6. reconnexion → récupération des statistiques du compte
 
-### 1. Créer le dépôt GitHub
-Tu peux créer un repo du type :
-- `elopad`
+## Supabase
+L’application attend deux tables :
+- `profiles`
+- `matches`
 
-### 2. Y mettre le contenu du projet
-Le dossier à publier est :
-- `padel-tracker/`
+Le schéma de base est fourni dans :
+- `supabase-schema.sql`
 
-Le plus simple est d’utiliser ce dossier comme racine du repo GitHub.
+## Déploiement Netlify
+Projet statique, sans build :
+- Publish directory : `.`
+- Build command : *(vide)*
 
-### 3. Connecter Netlify
-Sur Netlify :
-- **Add new project**
-- **Import from Git**
-- choisir ton repo GitHub
-
-### 4. Réglages Netlify
-Réglages recommandés :
-- **Base directory** : *(laisser vide si le repo contient directement les fichiers du projet)*
-- **Build command** : *(laisser vide)*
-- **Publish directory** : `.`
-
-Si tu mets le projet dans un repo plus large, alors :
-- **Base directory** : `padel-tracker`
-- **Publish directory** : `.`
-
-### 5. Résultat
-Netlify déploiera automatiquement le site à chaque push sur GitHub.
-
-## Workflow conseillé
-1. on modifie EloPad dans le workspace
-2. on commit les changements
-3. on met à jour la version texte dans :
-   - `/Volumes/Family/Milo/SORTIES/VibeCoding/EloPad/`
-4. tu pushes le code sur GitHub
-5. Netlify republie automatiquement
-
-## Étapes suivantes utiles
-- ajouter de vraies photos de terrains
-- ajouter des adresses précises
-- transformer EloPad en PWA
-- ajouter une vraie icône d’app et un manifest
+## Nom produit
+Le nom produit actuel est :
+- **PadelStats**
