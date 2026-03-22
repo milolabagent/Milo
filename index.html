@@ -191,6 +191,7 @@
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd5dWpva3llYW5iem56cnJvaWdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM1Njk4OTksImV4cCI6MjA4OTE0NTg5OX0.eg9ci6hUnfozuPJWLFon-rYOyPTwm6CzcINb_ao8zrU';
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const APP_KEY = 'padelstats-user-state-v1';
+    const REMEMBER_KEY = 'padelstats-remember-me';
     const courtDetails = [
       {name:'AirPad La Praille',address:'Secteur La Praille, Genève',photo:'AirPad La Praille',desc:'Complexe moderne pensé pour un usage urbain rapide.'},
       {name:'AirPad Les Acacias',address:'Les Acacias, Genève',photo:'AirPad Les Acacias',desc:'Spot pratique côté ville pour les matchs après le travail.'},
@@ -206,7 +207,7 @@
     const els = {
       publicLanding: $('publicLanding'), appArea: $('appArea'), bottomNav: $('bottomNav'), heroTitle: $('hero-title'), heroLead: $('hero-lead'), openAuth: $('openAuth'), logoutBtn: $('logoutBtn'), authStatus: $('authStatus'), ctaCreateAccount: $('ctaCreateAccount'), ctaLogin: $('ctaLogin'),
       ratingValue: $('ratingValue'), ratingDelta: $('ratingDelta'), progressBar: $('progressBar'), statMatches: $('statMatches'), statWinRate: $('statWinRate'), statSpent: $('statSpent'), favShort: $('favShort'), historyList: $('historyList'), allCourts: $('allCourts'), courtSelect: $('courtSelect'), startRating: $('startRating'), matchDate: $('matchDate'), costInput: $('costInput'), notes: $('notes'), quickWin: $('quickWin'), quickLoss: $('quickLoss'),
-      authModal: $('authModal'), showLogin: $('showLogin'), showSignup: $('showSignup'), loginPanel: $('loginPanel'), signupPanel: $('signupPanel'), closeAuth: $('closeAuth'), closeAuth2: $('closeAuth2'), loginEmail: $('loginEmail'), loginPassword: $('loginPassword'), signupEmail: $('signupEmail'), signupPassword: $('signupPassword'), loginSubmit: $('loginSubmit'), signupSubmit: $('signupSubmit'),
+      authModal: $('authModal'), showLogin: $('showLogin'), showSignup: $('showSignup'), loginPanel: $('loginPanel'), signupPanel: $('signupPanel'), closeAuth: $('closeAuth'), closeAuth2: $('closeAuth2'), loginEmail: $('loginEmail'), loginPassword: $('loginPassword'), rememberMe: $('rememberMe'), signupEmail: $('signupEmail'), signupPassword: $('signupPassword'), loginSubmit: $('loginSubmit'), signupSubmit: $('signupSubmit'),
       courtModal: $('courtModal'), modalPhoto: $('modalPhoto'), modalTitle: $('modalTitle'), modalAddress: $('modalAddress'), modalDesc: $('modalDesc'), mapsLink: $('mapsLink'), closeModal: $('closeModal'), quizLevelTitle: $('quizLevelTitle'), quizLevelText: $('quizLevelText'), applyEstimatedLevel: $('applyEstimatedLevel'), manualLevel: $('manualLevel'), saveManualLevel: $('saveManualLevel'), accountSummary: $('accountSummary'), goToLevel: $('goToLevel')
     };
 
@@ -494,8 +495,9 @@
     }
 
     async function refreshAuthUI() {
+      const remember = localStorage.getItem(REMEMBER_KEY) === 'true';
       const { data: { session } } = await supabaseClient.auth.getSession();
-      if (session?.user) {
+      if (session?.user && remember) {
         currentUser = session.user;
         try {
           await loadCloudState(session.user);
@@ -506,6 +508,7 @@
         }
         switchToAppMode(session.user);
       } else {
+        if (session?.user && !remember) await supabaseClient.auth.signOut();
         resetToPublicMode();
       }
     }
@@ -519,11 +522,12 @@
     els.closeAuth.onclick = () => els.authModal.classList.remove('open');
     els.closeAuth2.onclick = () => els.authModal.classList.remove('open');
     els.authModal.onclick = e => { if (e.target === els.authModal) els.authModal.classList.remove('open'); };
-    els.logoutBtn.onclick = async () => { await supabaseClient.auth.signOut(); await refreshAuthUI(); };
+    els.logoutBtn.onclick = async () => { localStorage.removeItem(REMEMBER_KEY); await supabaseClient.auth.signOut(); await refreshAuthUI(); };
 
     els.loginSubmit.onclick = async () => {
       const email = els.loginEmail.value.trim();
       const password = els.loginPassword.value;
+      localStorage.setItem(REMEMBER_KEY, els.rememberMe.checked ? 'true' : 'false');
       const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
       if (error) return alert('Connexion impossible : ' + error.message);
       els.authModal.classList.remove('open');
