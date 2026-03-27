@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#08101c" />
+  <meta name="description" content="PadelStats — suis tes matchs, ton niveau et tes statistiques padel." />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PadelStats" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
+  <title>PadelStats</title>
+  <style>
+    :root{--bg:#07101c;--bg2:#0c1728;--panel:rgba(18,29,50,.92);--panel2:rgba(22,35,60,.98);--line:rgba(255,255,255,.08);--line-strong:rgba(255,255,255,.14);--text:#f5f8ff;--muted:#9db0d4;--accent:#6ba8ff;--accent2:#8d7cff;--success:#20d98d;--danger:#ff6678;--gold:#ffd76a;--shadow:0 20px 50px rgba(0,0,0,.34);--radius:24px}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent} html,body{margin:0;padding:0} html{background:#07101c}
+    body{min-height:100vh;color:var(--text);font-family:Inter,system-ui,sans-serif;background:radial-gradient(circle at top left, rgba(107,168,255,.18), transparent 28%),radial-gradient(circle at top right, rgba(141,124,255,.12), transparent 24%),linear-gradient(180deg,var(--bg) 0%,#09111d 38%,var(--bg2) 100%)}
+    .hidden{display:none!important}.glass{background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.03));border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px);border-radius:var(--radius)}
+    .shell{width:min(100%,640px);margin:0 auto;padding:calc(12px + env(safe-area-inset-top,0px)) 12px calc(96px + env(safe-area-inset-bottom,0px))}
+    .hero{padding:18px 16px;margin-bottom:14px}.hero-top{display:grid;gap:14px}.eyebrow{display:inline-flex;padding:7px 11px;border:1px solid var(--line);border-radius:999px;color:var(--accent);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;background:rgba(255,255,255,.04)}
+    h1{margin:12px 0 0;font-size:34px;line-height:1.02;letter-spacing:-.05em}.lead{color:var(--muted);font-size:15px;line-height:1.55;margin:12px 0 0;max-width:56ch}
+    .hero-actions,.sheet-actions,.stat-actions,.level-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.hero-actions .btn:only-child,.sheet-actions .btn:only-child,.stat-actions .btn:only-child,.level-actions .btn:only-child{grid-column:1/-1}
+    .btn{border:1px solid var(--line);background:rgba(255,255,255,.05);color:#fff;border-radius:18px;padding:14px 16px;font-weight:800;cursor:pointer;text-decoration:none;min-height:50px;touch-action:manipulation;font-size:15px}.btn[disabled]{opacity:.65;cursor:wait}.btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border:0}.btn.success{background:linear-gradient(135deg,#22d38c,#0ea96a);border:0}.btn.danger{background:rgba(255,102,120,.14);color:#ffd7dd}
+    .tabs{display:none}.view{display:none}.view.active{display:block}.stack,.form-grid,.level-grid,.quiz,.list,.cost-history-list,.intro-list,.screen-stack,.courts,.events{display:grid;gap:12px}
+    .section{padding:16px}.panel,.kpi,.match,.level-card,.court-card,.event-card,.auth-card,.cost-summary-card,.cost-filter-card,.cost-history-item,.welcome-box,.intro-item,.screen-header,.summary-strip{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px}
+    .screen-stack{gap:14px}.screen-header{padding:16px 16px 14px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035))}.screen-kicker{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.screen-label{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}.screen-meta{font-size:11px;color:var(--muted)}.screen-title{margin:0;font-size:26px;letter-spacing:-.04em}.screen-copy{margin:8px 0 0;color:var(--muted);line-height:1.5;font-size:14px}
+    .summary-strip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:12px}.summary-strip .mini{padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line)}.summary-strip small{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.summary-strip strong{display:block;font-size:16px;line-height:1.25}
+    .title-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px}.section-title{margin:0;font-size:17px;font-weight:800}.subtle{color:var(--muted);font-size:12px;line-height:1.4}
+    .grid{display:grid;gap:14px}.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.kpi small{display:block;color:var(--muted);font-size:11px;margin-bottom:6px}.kpi strong{font-size:22px;line-height:1.1}
+    .rating{display:grid;gap:12px}.big{font-size:50px;font-weight:900;letter-spacing:-.06em;line-height:1}.muted{color:var(--muted)}.bar{height:10px;border-radius:999px;background:rgba(255,255,255,.06);overflow:hidden;margin-top:10px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:4%}
+    .form-grid{gap:12px}.row-2{display:grid;gap:10px}label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:700}input,select{width:100%;background:#0d1730;color:var(--text);border:1px solid var(--line-strong);border-radius:16px;padding:14px;font:inherit;font-size:16px}
+    .match{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:12px}.badge{width:30px;height:30px;border-radius:11px;display:grid;place-items:center;font-size:15px;font-weight:900}.badge.win{color:#59efb2;background:rgba(32,217,141,.14)}.badge.loss{color:#ff9fab;background:rgba(255,102,120,.14)}.match-title{font-weight:800;font-size:13px}.match-meta,.tiny{color:var(--muted);font-size:11px;margin-top:3px;line-height:1.35}.delta{font-weight:900;font-size:13px}.pos{color:#59efb2}.neg{color:#ff9fab}.form-chip-row{display:flex;flex-wrap:wrap;gap:8px}.form-chip{min-width:42px;padding:9px 12px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:12px;font-weight:800;cursor:pointer}.form-chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}.home-focus-card{display:grid;gap:12px;padding:14px;border-radius:22px;background:linear-gradient(135deg,rgba(107,168,255,.14),rgba(141,124,255,.10));border:1px solid rgba(255,255,255,.08)}.focus-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.focus-copy{margin:0;color:var(--muted);font-size:13px;line-height:1.45}.form-streak{display:flex;flex-wrap:wrap;gap:8px}.form-streak span{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:13px;border:1px solid var(--line);background:rgba(255,255,255,.05)}.form-streak .win{color:#59efb2;background:rgba(32,217,141,.14)}.form-streak .loss{color:#ff9fab;background:rgba(255,102,120,.14)}.empty-streak{color:var(--muted);font-size:12px}.insight-grid{display:grid;gap:10px}.insight-card{padding:14px;border-radius:20px;background:rgba(255,255,255,.04);border:1px solid var(--line);display:grid;gap:10px}.insight-card strong{font-size:16px;line-height:1.25}.insight-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.insight-chip-row{display:flex;flex-wrap:wrap;gap:8px}.insight-chip{display:inline-flex;align-items:center;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--muted);font-size:11px;font-weight:800}.insight-chip.good{color:#bdf5dc;background:rgba(32,217,141,.12)}.insight-chip.warn{color:#ffe8a9;background:rgba(255,215,106,.10)}.insight-chip.bad{color:#ffd7dd;background:rgba(255,102,120,.10)}.trend-card{display:grid;gap:10px;padding:14px;border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--line)}.trend-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.trend-meta small{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.trend-meta strong{display:block;font-size:18px}.trend-copy{margin:4px 0 0;color:var(--muted);font-size:12px;line-height:1.4}.trend-graph{position:relative;height:120px;padding:12px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid var(--line);overflow:hidden}.trend-svg{width:100%;height:100%}.trend-grid-line{stroke:rgba(255,255,255,.08);stroke-width:1}.trend-line{fill:none;stroke:url(#trendGradient);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.trend-area{fill:url(#trendAreaGradient);opacity:.32}.trend-dot{fill:#fff;stroke:#6ba8ff;stroke-width:3}.trend-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.trend-labels div{padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.trend-labels small{display:block;color:var(--muted);font-size:11px;margin-bottom:4px}.trend-labels strong{font-size:14px}.budget-progress{display:grid;gap:8px}.budget-bar{height:12px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.budget-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#22d38c,#6ba8ff,#8d7cff);width:0}.primary-action-btn{position:relative;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}.primary-action-btn::before{content:'+';display:block;font-size:18px;line-height:1;margin-bottom:2px}.toast{position:fixed;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(16px);width:min(calc(100% - 24px),420px);padding:14px 16px;border-radius:18px;background:rgba(10,18,33,.96);border:1px solid var(--line);box-shadow:var(--shadow);color:var(--text);font-size:13px;line-height:1.4;opacity:0;pointer-events:none;transition:opacity .22s ease, transform .22s ease;z-index:30}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast strong{display:block;font-size:14px;margin-bottom:4px}.sheet-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}.sheet-title{margin:0;font-size:22px;letter-spacing:-.04em}.sheet-copy{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.45}
+    .courts,.events{grid-template-columns:1fr}.court-card{cursor:pointer;padding:0;overflow:hidden}.court-photo{height:158px;background:linear-gradient(135deg,#27466f,#1a2b4a);background-size:cover;background-position:center;display:flex;align-items:end;padding:12px;font-weight:800;position:relative}.court-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.42))}.court-photo span{position:relative;z-index:1}.court-body{padding:14px}.court-name,.event-title{font-weight:800;font-size:16px}.court-meta,.event-meta{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}.court-source{display:inline-flex;margin-top:10px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--accent);font-size:10px;font-weight:700}.event-chip{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(107,168,255,.12);color:var(--accent);font-size:11px;font-weight:700;margin-bottom:10px}
+    .cost-hero,.cost-filter-bar,.cost-history-stats,.onboarding,.cost-presets{display:grid;gap:10px}.cost-summary-card strong{display:block;font-size:24px}.cost-summary-card small,.cost-filter-card label,.cost-history-meta,.cost-history-empty,.cost-history-subtle{color:var(--muted)}.cost-history-top{display:grid;gap:8px}.cost-history-item h3{margin:0;font-size:16px}.cost-history-total{font-size:22px;font-weight:900}.cost-history-stats{grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px}.cost-pill{padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid var(--line)}.cost-pill strong{display:block;font-size:15px}.cost-pill span{display:block;font-size:11px;color:var(--muted);margin-top:4px}.cost-preset-btn{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--text);border-radius:14px;padding:12px 10px;font-weight:800;cursor:pointer}
+    .level-card strong{display:block;margin-bottom:6px}.level-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}.quiz-card{background:var(--panel2);border:1px solid var(--line);border-radius:22px;padding:14px}.quiz-card h3{margin:0 0 10px;font-size:15px}.quiz-options{display:grid;gap:8px}.quiz-options label{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);cursor:pointer;color:var(--text)}.quiz-options label.selected{border-color:rgba(107,168,255,.45);background:linear-gradient(135deg, rgba(107,168,255,.14), rgba(141,124,255,.12));box-shadow:0 10px 24px rgba(0,0,0,.18)}.quiz-options input{width:auto;transform:translateY(2px);accent-color:#6ba8ff}.quiz-result{background:rgba(107,168,255,.10);border:1px solid rgba(107,168,255,.18);border-radius:20px;padding:14px}
+    .modal{position:fixed;inset:0;background:rgba(5,9,18,.72);display:none;align-items:end;justify-content:center;padding:14px;z-index:20}.modal.open{display:flex}.sheet{max-width:540px;width:100%;background:#101a31;border:1px solid var(--line);border-radius:24px;padding:16px;box-shadow:var(--shadow)}.sheet-photo{height:180px;border-radius:18px;background:linear-gradient(135deg,#31578b,#1d2e4d);margin-bottom:12px;padding:12px;display:flex;align-items:end;font-weight:900}.sheet p{color:var(--muted);line-height:1.5}.auth-switch{display:flex;gap:8px;margin-bottom:8px}.auth-switch button{flex:1}.auth-status{font-size:12px;color:var(--gold)}
+    .status-banner{margin-top:12px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-size:13px;line-height:1.45}.status-banner.ok{border-color:rgba(32,217,141,.28);background:rgba(32,217,141,.10);color:#bdf5dc}.status-banner.warn{border-color:rgba(255,215,106,.28);background:rgba(255,215,106,.10);color:#ffe8a9}.status-banner.error{border-color:rgba(255,102,120,.28);background:rgba(255,102,120,.10);color:#ffd7dd}
+    .app-shell{display:grid;gap:14px}.mobile-app-bar{position:sticky;top:calc(8px + env(safe-area-inset-top,0px));z-index:12;padding:14px 14px 12px;border-radius:24px;background:linear-gradient(180deg,rgba(13,21,38,.96),rgba(10,17,31,.92));border:1px solid var(--line);box-shadow:0 12px 34px rgba(0,0,0,.24);backdrop-filter:blur(16px)}.mobile-app-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.mobile-app-title{margin:4px 0 0;font-size:24px;letter-spacing:-.05em}.mobile-app-copy{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.45}.mobile-badge{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(107,168,255,.12);border:1px solid rgba(107,168,255,.22);color:var(--accent);font-size:10px;font-weight:800;letter-spacing:.05em;text-transform:uppercase}.mobile-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}.shortcut-btn{border:1px solid var(--line);background:rgba(255,255,255,.035);color:var(--text);border-radius:18px;padding:12px 10px;text-align:left;cursor:pointer;min-height:72px}.shortcut-btn strong{display:block;font-size:13px;line-height:1.2}.shortcut-btn span{display:block;margin-top:5px;color:var(--muted);font-size:11px;line-height:1.3}.mobile-install-banner{display:grid;gap:10px;margin-top:12px;padding:12px 14px;border-radius:20px;background:rgba(255,255,255,.045);border:1px solid var(--line)}.mobile-install-banner strong{font-size:14px}.mobile-install-banner p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.mobile-install-actions{display:flex;flex-wrap:wrap;gap:8px}.install-btn{min-height:44px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);font-weight:800;cursor:pointer}.install-btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent}.install-btn[hidden]{display:none!important}.mobile-section{display:grid;gap:12px}.quick-overview{display:grid;gap:10px}.quick-overview-card{display:grid;gap:6px;padding:14px;border-radius:20px;background:rgba(255,255,255,.035);border:1px solid var(--line)}.quick-overview-card small{color:var(--muted);font-size:11px}.quick-overview-card strong{font-size:18px;line-height:1.2}.stack-separator{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:2px 0}.bottom-nav{position:fixed;left:0;right:0;bottom:0;padding:10px 12px calc(12px + env(safe-area-inset-bottom,0px));background:linear-gradient(180deg,rgba(7,17,31,0),rgba(7,17,31,.88) 30%, rgba(7,17,31,.98) 100%);z-index:15}.bottom-nav .inner{max-width:640px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.nav-btn{padding:11px 6px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);font-size:11px;font-weight:800;cursor:pointer;min-height:56px;line-height:1.15}.nav-btn.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent}
+    @media (min-width:900px){.shell{width:min(100%,1180px);padding:18px 18px calc(106px + env(safe-area-inset-bottom,0px))}.hero{padding:22px}.hero-top{grid-template-columns:minmax(0,1fr) auto;align-items:flex-start}.tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:0 0 14px}.tab{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--muted);border-radius:18px;padding:12px 10px;font-weight:800;cursor:pointer}.tab.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}.app-shell{gap:18px}.mobile-app-bar{top:18px;padding:18px}.mobile-app-top{align-items:center}.mobile-app-title{font-size:28px}.mobile-shortcuts{grid-template-columns:repeat(3,minmax(0,180px));justify-content:start}.mobile-section{grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);align-items:start}.quick-overview{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:minmax(0,1.1fr) minmax(280px,.9fr)}.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}.row-2,.cost-hero,.cost-filter-bar,.courts,.events,.onboarding{grid-template-columns:repeat(2,minmax(0,1fr))}.cost-history-top{grid-template-columns:minmax(0,1fr) auto;align-items:flex-start}.hero-actions,.sheet-actions,.stat-actions,.level-actions{display:flex;flex-wrap:wrap}.hero-actions .btn,.sheet-actions .btn,.stat-actions .btn,.level-actions .btn{width:auto}.screen-title{font-size:30px}}
+  </style>
+  <script src="./assets/vendor/supabase.js"></script>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero glass">
+      <div class="hero-top">
+        <div>
+          <span class="eyebrow">PadelStats</span>
+          <h1 id="hero-title">Suis ta progression padel, simplement.</h1>
+          <p class="lead" id="hero-lead">Crée ton compte, définis ton niveau, enregistre chaque partie et suis l’évolution de ton niveau, de tes coûts et de tes stats.</p>
+        </div>
+        <div class="hero-actions">
+          <button class="btn" id="openAuth" onclick="openAuth('login')">Se connecter</button>
+          <button class="btn primary hidden" id="logoutBtn" onclick="logoutUser()">Se déconnecter</button>
+        </div>
+      </div>
+      <div class="auth-status" id="authStatus" style="margin-top:10px;display:none;"></div>
+      <div class="status-banner hidden" id="syncBanner"></div>
+    </section>
+
+    <section id="publicLanding" class="glass section">
+      <div class="onboarding">
+        <div>
+          <div class="welcome-box">
+            <p class="eyebrow">Bienvenue</p>
+            <h2 class="section-title" style="font-size:28px;margin-bottom:10px;">Une base neutre tant que tu n’es pas connecté</h2>
+            <p class="lead" style="margin:0;max-width:none;">Quand tu arrives sur PadelStats sans session active, tu vois une page neutre : aucun niveau imposé, aucune statistique parasite, aucun historique d’un autre utilisateur.</p>
+            <div class="hero-actions" style="margin-top:16px;">
+              <button class="btn primary" id="ctaCreateAccount" onclick="openAuth('signup')">Créer un compte</button>
+              <button class="btn" id="ctaLogin" onclick="openAuth('login')">J’ai déjà un compte</button>
+            </div>
+          </div>
+          <div class="intro-list">
+            <div class="intro-item"><strong>1. Créer ton compte</strong><span class="muted">Tu t’identifies avec ton email et ton mot de passe.</span></div>
+            <div class="intro-item"><strong>2. Définir ton niveau de départ</strong><span class="muted">Soit tu le connais, soit tu le découvres via l’onglet Niveau.</span></div>
+            <div class="intro-item"><strong>3. Enregistrer chaque partie</strong><span class="muted">Victoire ou défaite, coût, terrain, note rapide — tout est structuré.</span></div>
+          </div>
+        </div>
+        <div class="stack">
+          <section class="panel">
+            <div class="title-row"><h2 class="section-title">Ce que fait l’app</h2></div>
+            <div class="level-grid">
+              <article class="level-card"><strong>Suivi des matchs</strong><p>Après chaque partie, tu ajoutes le résultat, le coût et le terrain.</p></article>
+              <article class="level-card"><strong>Niveau estimé ou choisi</strong><p>Tu peux entrer ton niveau manuellement ou utiliser le questionnaire d’estimation.</p></article>
+              <article class="level-card"><strong>Stats personnelles</strong><p>Tu retrouves tes chiffres dès que tu te reconnectes à ton compte.</p></article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <div id="appArea" class="hidden app-shell">
+      <section class="mobile-app-bar glass">
+        <div class="mobile-app-top">
+          <div>
+            <span class="mobile-badge">Structure mobile-first</span>
+            <h2 class="mobile-app-title" id="mobileViewTitle">Accueil</h2>
+            <p class="mobile-app-copy" id="mobileViewCopy">Cockpit mobile priorisant niveau, ajout rapide et lecture instantanée des stats.</p>
+          </div>
+          <button class="btn" id="mobileLogoutBtn" onclick="logoutUser()">Quitter</button>
+        </div>
+        <div class="mobile-shortcuts">
+          <button class="shortcut-btn" data-jump-view="home"><strong>Match</strong><span>Ajouter un résultat</span></button>
+          <button class="shortcut-btn" data-jump-view="level"><strong>Niveau</strong><span>Fixer la base</span></button>
+          <button class="shortcut-btn" data-jump-view="costs"><strong>Coûts</strong><span>Lire le budget</span></button>
+        </div>
+        <div class="mobile-install-banner" id="installBanner" hidden>
+          <div>
+            <strong id="installBannerTitle">Version installable prête</strong>
+            <p id="installBannerText">Ajoute PadelStats à ton écran d’accueil pour tester un mode plus app-like dès maintenant.</p>
+          </div>
+          <div class="mobile-install-actions">
+            <button class="install-btn primary" id="installAppBtn" hidden>Installer l’app</button>
+            <button class="install-btn" id="installLaterBtn">Plus tard</button>
+          </div>
+        </div>
+      </section>
+
+      <div class="tabs">
+        <button class="tab active" data-view="home">Accueil</button>
+        <button class="tab" data-view="courts">Terrains</button>
+        <button class="tab" data-view="level">Niveau</button>
+        <button class="tab" data-view="costs">Coûts</button>
+        <button class="tab" data-view="events">Événements</button>
+      </div>
+
+      <section id="view-home" class="view active">
+        <div class="screen-stack">
+          <section class="screen-header glass">
+            <div class="screen-kicker"><span class="screen-label">Accueil</span><span class="screen-meta">Vue mobile principale</span></div>
+            <h2 class="screen-title">Un vrai point d’entrée mobile pour jouer, suivre et corriger vite.</h2>
+            <p class="screen-copy">En haut : le niveau et les repères essentiels. Ensuite : l’action principale d’ajout. Puis seulement l’historique et les éléments secondaires.</p>
+          </section>
+          <div class="mobile-section">
+            <div class="stack">
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Vue rapide</h2><span class="subtle">lecture smartphone</span></div>
+                <div class="home-focus-card">
+                  <div class="focus-top">
+                    <div>
+                      <small style="color:var(--muted);display:block;margin-bottom:6px;">Focus du moment</small>
+                      <strong id="focusTitle">Définis ton niveau pour lancer la progression.</strong>
+                    </div>
+                    <button class="btn primary" id="openQuickMatch">Ajout rapide</button>
+                  </div>
+                  <p class="focus-copy" id="focusCopy">Passe en mode app avec une saisie express de match et une lecture immédiate de ta dynamique récente.</p>
+                  <div>
+                    <small style="color:var(--muted);display:block;margin-bottom:8px;">Dynamique récente</small>
+                    <div class="form-streak" id="recentForm"></div>
+                  </div>
+                </div>
+                <div class="quick-overview">
+                  <article class="quick-overview-card"><small>Niveau actuel</small><strong id="heroRatingValue">—</strong><span class="muted" id="heroRatingDelta">en attente de niveau</span></article>
+                  <article class="quick-overview-card"><small>Session</small><strong id="accountSummary">Connecté.</strong><span class="muted">Base métier conservée</span></article>
+                </div>
+                <div class="stack-separator"></div>
+                <div class="kpis">
+                  <div class="kpi"><small>Parties jouées</small><strong id="statMatches">0</strong></div>
+                  <div class="kpi"><small>% victoire</small><strong id="statWinRate">0%</strong></div>
+                  <div class="kpi"><small>Dépensé</small><strong id="statSpent">0 CHF</strong></div>
+                  <div class="kpi"><small>Terrain favori</small><strong id="favShort">—</strong></div>
+                </div>
+                <div class="stat-actions" style="margin-top:12px;"><button class="btn" id="goToLevel">Définir / ajuster mon niveau</button></div>
+              </section>
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Ajouter un match</h2><span class="subtle">action principale</span></div>
+                <div class="panel">
+                  <div class="form-grid">
+                    <div class="row-2">
+                      <div><label for="startRating">Niveau de base</label><input id="startRating" type="number" step="0.01" min="1" max="10" value="4.00" disabled /></div>
+                      <div><label>Barème actuel</label><input value="Victoire +0.03 / Défaite -0.05" disabled /></div>
+                    </div>
+                    <div><label for="courtSelect">Terrain</label><select id="courtSelect"></select></div>
+                    <div class="row-2">
+                      <div><label for="matchDate">Date</label><input id="matchDate" type="date" /></div>
+                      <div><label for="costInput">Coût du match (CHF)</label><input id="costInput" type="number" step="0.5" min="0" placeholder="10 ou 15" /></div><div class="cost-presets"><label>Présélections rapides</label><div class="row-2"><button class="cost-preset-btn" type="button" data-cost-preset="10">10 CHF</button><button class="cost-preset-btn" type="button" data-cost-preset="15">15 CHF</button></div></div>
+                    </div>
+                    <div><label for="notes">Note rapide</label><input id="notes" type="text" placeholder="Ex : match serré, bon feeling" maxlength="140" /></div>
+                    <div class="stat-actions">
+                      <button class="btn success" id="quickWin">J’ai gagné</button>
+                      <button class="btn danger" id="quickLoss">J’ai perdu</button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="stack">
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Progression</h2><span class="subtle">signal principal</span></div>
+                <div class="rating"><div class="panel"><div class="big" id="ratingValue">—</div><div class="muted" id="ratingDelta">en attente de niveau</div><div class="bar"><i id="progressBar"></i></div></div></div>
+                <div class="summary-strip" style="margin-top:12px;">
+                  <div class="mini"><small>Priorité</small><strong>Ajouter un match ou ajuster le niveau</strong></div>
+                  <div class="mini"><small>Lecture</small><strong>Hiérarchie pensée pour smartphone</strong></div>
+                </div>
+              </section>
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Momentum joueur</h2><span class="subtle">lecture visuelle</span></div>
+                <div class="trend-card">
+                  <div class="trend-top">
+                    <div class="trend-meta">
+                      <small>Tendance sur les 7 derniers matchs</small>
+                      <strong id="trendHeadline">En attente de données</strong>
+                      <p class="trend-copy" id="trendCopy">Ajoute quelques matchs pour voir une vraie courbe de progression.</p>
+                    </div>
+                    <div class="insight-chip-row"><span class="insight-chip" id="trendChip">Pas assez de matchs</span></div>
+                  </div>
+                  <div class="trend-graph">
+                    <svg class="trend-svg" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true">
+                      <defs>
+                        <linearGradient id="trendGradient" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22d38c" /><stop offset="100%" stop-color="#8d7cff" /></linearGradient>
+                        <linearGradient id="trendAreaGradient" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#6ba8ff" stop-opacity="0.45" /><stop offset="100%" stop-color="#6ba8ff" stop-opacity="0" /></linearGradient>
+                      </defs>
+                      <line class="trend-grid-line" x1="0" y1="20" x2="320" y2="20"></line>
+                      <line class="trend-grid-line" x1="0" y1="60" x2="320" y2="60"></line>
+                      <line class="trend-grid-line" x1="0" y1="100" x2="320" y2="100"></line>
+                      <path class="trend-area" id="trendAreaPath" d=""></path>
+                      <path class="trend-line" id="trendLinePath" d=""></path>
+                      <g id="trendDots"></g>
+                    </svg>
+                  </div>
+                  <div class="trend-labels">
+                    <div><small>Début</small><strong id="trendStart">—</strong></div>
+                    <div><small>Actuel</small><strong id="trendCurrent">—</strong></div>
+                    <div><small>Variation</small><strong id="trendDeltaValue">—</strong></div>
+                  </div>
+                </div>
+              </section>
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Insights rapides</h2><span class="subtle">plus app-like</span></div>
+                <div class="insight-grid">
+                  <article class="insight-card">
+                    <strong id="insightPrimaryTitle">Aucun insight pour l’instant</strong>
+                    <p id="insightPrimaryText">Dès que tu enregistres des matchs, l’accueil te sort une lecture plus utile que de simples compteurs.</p>
+                    <div class="insight-chip-row" id="insightPrimaryChips"></div>
+                  </article>
+                  <article class="insight-card">
+                    <strong id="budgetHeadline">Budget du mois</strong>
+                    <p id="budgetCopy">Le suivi budget se remplit automatiquement avec les matchs et accessoires.</p>
+                    <div class="budget-progress">
+                      <div class="budget-bar"><i id="budgetBarFill"></i></div>
+                      <div class="insight-chip-row"><span class="insight-chip" id="budgetChip">0% du repère 120 CHF</span></div>
+                    </div>
+                  </article>
+                </div>
+              </section>
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Historique récent</h2><span class="subtle">tes derniers matchs</span></div>
+                <div class="list" id="historyList"></div>
+              </section>
+              <section class="section glass">
+                <div class="title-row"><h2 class="section-title">Repères produit</h2><span class="subtle">garde le cerveau actuel</span></div>
+                <div class="level-grid">
+                  <article class="level-card"><strong>Authentification intacte</strong><p>Connexion, compte et synchro restent en place.</p></article>
+                  <article class="level-card"><strong>Logique niveau intacte</strong><p>Estimation, niveau manuel et progression restent inchangés.</p></article>
+                  <article class="level-card"><strong>Matchs + coûts intacts</strong><p>Le refactor touche surtout la structure et la hiérarchie mobile.</p></article>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-courts" class="view"><div class="screen-stack"><section class="screen-header glass"><div class="screen-kicker"><span class="screen-label">Terrains</span><span class="screen-meta">navigation claire</span></div><h2 class="screen-title">Choisis vite où tu joues.</h2><p class="screen-copy">Les terrains deviennent une liste mobile lisible, avec visuel, adresse et accès direct au détail.</p></section><section class="section glass"><div class="title-row"><h2 class="section-title">Terrains disponibles</h2><span class="subtle">adresse + photo</span></div><div class="courts" id="allCourts"></div></section></div></section>
+
+      <section id="view-level" class="view">
+        <div class="screen-stack">
+        <section class="screen-header glass"><div class="screen-kicker"><span class="screen-label">Niveau</span><span class="screen-meta">base de progression</span></div><h2 class="screen-title">Définis ton point de départ.</h2><p class="screen-copy">Cette vue se concentre sur une seule mission : fixer un niveau fiable avant d’empiler les matchs.</p></section>
+        <section class="section glass">
+          <div class="title-row"><h2 class="section-title">Définir ou estimer mon niveau</h2><span class="subtle">manuel + questionnaire</span></div>
+          <div class="quiz-result">
+            <strong id="quizLevelTitle">Estimation rapide</strong>
+            <p id="quizLevelText">Réponds aux questions ci-dessous pour obtenir une estimation simple de ton niveau.</p>
+            <div class="level-actions" style="margin-top:12px;"><button class="btn primary" id="applyEstimatedLevel">Utiliser ce niveau</button></div>
+          </div>
+          <div class="panel" style="margin-bottom:14px;">
+            <div class="row-2">
+              <div><label for="manualLevel">Choisir manuellement mon niveau</label><input id="manualLevel" type="number" min="1" max="10" step="0.1" placeholder="Ex : 4.5" /></div>
+              <div style="display:flex;align-items:end;"><button class="btn primary" id="saveManualLevel">Enregistrer ce niveau</button></div>
+            </div>
+          </div>
+          <div class="quiz" id="levelQuiz">
+            <article class="quiz-card"><h3>1. Régularité en échange</h3><div class="quiz-options"><label><input type="radio" name="q1" value="1"> J’ai du mal à tenir l’échange</label><label><input type="radio" name="q1" value="3"> Je tiens quelques balles sans vraie maîtrise</label><label><input type="radio" name="q1" value="5"> Je suis assez régulier en rythme modéré</label><label><input type="radio" name="q1" value="7"> Je tiens bien le tempo avec peu de fautes</label><label><input type="radio" name="q1" value="9"> Je suis très régulier même sous pression</label></div></article>
+            <article class="quiz-card"><h3>2. Utilisation des vitres</h3><div class="quiz-options"><label><input type="radio" name="q2" value="1"> Je ne sais pas encore les jouer</label><label><input type="radio" name="q2" value="3"> Je commence à m’en servir mais je doute</label><label><input type="radio" name="q2" value="5"> Je défends correctement avec les vitres</label><label><input type="radio" name="q2" value="7"> Je m’en sers intelligemment dans l’échange</label><label><input type="radio" name="q2" value="9"> J’utilise les vitres comme un vrai levier tactique</label></div></article>
+            <article class="quiz-card"><h3>3. Jeu au filet / transition</h3><div class="quiz-options"><label><input type="radio" name="q3" value="1"> Je reste surtout au fond</label><label><input type="radio" name="q3" value="3"> Je monte mais je perds vite le point</label><label><input type="radio" name="q3" value="5"> Je suis à l’aise au filet la plupart du temps</label><label><input type="radio" name="q3" value="7"> Je sais fermer les angles et construire</label><label><input type="radio" name="q3" value="9"> J’impose un vrai jeu d’attaque au filet</label></div></article>
+            <article class="quiz-card"><h3>4. Lecture tactique / placement</h3><div class="quiz-options"><label><input type="radio" name="q4" value="1"> Je joue surtout à l’instinct</label><label><input type="radio" name="q4" value="3"> Je commence à chercher les bonnes zones</label><label><input type="radio" name="q4" value="5"> Je construis les points de façon cohérente</label><label><input type="radio" name="q4" value="7"> Je varie selon les adversaires et les situations</label><label><input type="radio" name="q4" value="9"> Je lis très bien le match et j’impose un plan</label></div></article>
+            <article class="quiz-card"><h3>5. Niveau général ressenti</h3><div class="quiz-options"><label><input type="radio" name="q5" value="2"> Débutant / loisir occasionnel</label><label><input type="radio" name="q5" value="4"> Élémentaire à intermédiaire</label><label><input type="radio" name="q5" value="6"> Confirmé / bon joueur club</label><label><input type="radio" name="q5" value="8"> Avancé / expert club</label><label><input type="radio" name="q5" value="10"> Très haut niveau / compétition forte</label></div></article>
+          </div>
+        </section>
+        </div>
+      </section>
+
+      <section id="view-costs" class="view">
+        <div class="screen-stack">
+          <section class="screen-header glass"><div class="screen-kicker"><span class="screen-label">Coûts</span><span class="screen-meta">lecture smartphone</span></div><h2 class="screen-title">Lis tes dépenses sans te perdre.</h2><p class="screen-copy">Le résumé et les filtres passent avant le détail, pour une lecture mobile plus proche d’une vraie app.</p></section>
+        <section class="section glass">
+          <div class="title-row"><h2 class="section-title">Historique des coûts</h2><span class="subtle">par terrain, année ou mois</span></div>
+          <div class="cost-hero">
+            <div class="cost-summary-card"><small>Période affichée</small><strong id="costPeriodLabel">Total</strong></div>
+            <div class="cost-summary-card"><small>Total dépensé</small><strong id="costPeriodTotal">0 CHF</strong></div>
+            <div class="cost-summary-card"><small>Terrains actifs</small><strong id="costCourtsCount">0</strong></div>
+            <div class="cost-summary-card"><small>Coûts match</small><strong id="costMatchesTotal">0 CHF</strong></div>
+            <div class="cost-summary-card"><small>Accessoires</small><strong id="costAccessoriesTotal">0 CHF</strong></div>
+          </div>
+          <div class="cost-filter-bar">
+            <div class="cost-filter-card"><label for="costYearFilter">Année</label><select id="costYearFilter"></select></div>
+            <div class="cost-filter-card"><label for="costMonthFilter">Mois</label><select id="costMonthFilter"></select></div>
+            <div class="cost-filter-card"><label for="costScopeFilter">Périmètre</label><select id="costScopeFilter"><option value="all">Tout</option><option value="match">Matchs</option><option value="accessory">Accessoires</option></select></div>
+          </div>
+          <section class="panel">
+            <div class="title-row"><h3 class="section-title">Ajouter un coût accessoire</h3><span class="subtle">séparé des matchs</span></div>
+            <div class="form-grid">
+              <div class="row-2">
+                <div><label for="accessoryDate">Date</label><input id="accessoryDate" type="date" /></div>
+                <div><label for="accessoryAmount">Montant (CHF)</label><input id="accessoryAmount" type="number" step="0.5" min="0" placeholder="Ex : 8" /></div>
+              </div>
+              <div class="row-2">
+                <div><label for="accessoryCategory">Catégorie</label><select id="accessoryCategory"></select></div>
+                <div><label for="accessoryCourt">Terrain lié</label><select id="accessoryCourt"></select></div>
+              </div>
+              <div><label for="accessoryNotes">Note</label><input id="accessoryNotes" type="text" maxlength="140" placeholder="Ex : tube de balles, boisson, coaching" /></div>
+              <div class="stat-actions"><button class="btn primary" id="addAccessoryCost" type="button">Ajouter le coût accessoire</button></div>
+            </div>
+          </section>
+          <div class="title-row"><h3 class="section-title">Historique des coûts match</h3><span class="subtle">par terrain</span></div>
+          <div class="cost-history-list" id="costHistoryList"></div>
+          <div class="title-row"><h3 class="section-title">Historique des accessoires</h3><span class="subtle">distinct du match</span></div>
+          <div class="cost-history-list" id="accessoryHistoryList"></div>
+        </section>
+        </div>
+      </section>
+
+      <section id="view-events" class="view"><div class="screen-stack"><section class="screen-header glass"><div class="screen-kicker"><span class="screen-label">Plus</span><span class="screen-meta">app readiness</span></div><h2 class="screen-title">L’espace de fiabilité et de finition produit.</h2><p class="screen-copy">Ici, PadelStats commence à ressembler à une vraie app publiable : état réseau, synchro, installation et repères de confidentialité.</p></section><section class="section glass"><div class="title-row"><h2 class="section-title">État de l’app</h2><span class="subtle">pilotage rapide</span></div><div class="events"><article class="event-card"><div class="event-chip" id="appConnectionBadge">Réseau</div><div class="event-title" id="appConnectionTitle">Connexion en cours de lecture</div><div class="event-meta" id="appConnectionText">Le shell vérifie si l’app est en ligne, hors ligne ou installée.</div></article><article class="event-card"><div class="event-chip" id="appSyncBadge">Synchro</div><div class="event-title" id="appSyncTitle">Synchronisation en attente</div><div class="event-meta" id="appSyncText">Les matchs et coûts en file locale apparaissent ici pour rendre l’état réel visible.</div></article><article class="event-card"><div class="event-chip" id="appInstallBadge">Installation</div><div class="event-title" id="appInstallTitle">Mode web</div><div class="event-meta" id="appInstallText">Cet espace explique si l’app tourne dans le navigateur, en mode installée ou prête au shell natif.</div></article></div><div class="sheet-actions" style="margin-top:14px;"><button class="btn" type="button" id="forceSyncBtn">Forcer une synchro</button><button class="btn" type="button" id="revealInstallBtn">Voir l’installation</button></div></section><section class="section glass"><div class="title-row"><h2 class="section-title">Compte & session</h2><span class="subtle">utile en test réel</span></div><div class="events"><article class="event-card"><div class="event-chip">Compte</div><div class="event-title" id="appAccountTitle">Aucun compte actif</div><div class="event-meta" id="appAccountText">Connecte-toi pour lier ton niveau, tes matchs et tes coûts à ton profil.</div></article><article class="event-card"><div class="event-chip">Dernière synchro</div><div class="event-title" id="appLastSyncTitle">Pas encore de synchronisation</div><div class="event-meta" id="appLastSyncText">Quand la synchro cloud passe, un repère temporel apparaît ici.</div></article></div></section><section class="section glass"><div class="title-row"><h2 class="section-title">Confidentialité & publication</h2><span class="subtle">base store-friendly</span></div><div class="events"><article class="event-card"><div class="event-chip">Confidentialité</div><div class="event-title">Données limitées au suivi joueur</div><div class="event-meta">PadelStats stocke l’email du compte, le niveau, l’historique des matchs et les coûts liés au suivi personnel. Pas de tracking publicitaire affiché dans l’app actuelle.</div></article><article class="event-card"><div class="event-chip">Play Store</div><div class="event-title">Socle plus propre pour la publication</div><div class="event-meta">Shell installable, état réseau visible, file d’attente locale lisible et écran “Plus” réellement utile au lieu d’un simple placeholder.</div></article></div></section></div></section>
+    </div>
+  </main>
+
+  <div class="modal" id="authModal"><div class="sheet"><div class="auth-switch"><button class="btn primary" id="showLogin">Se connecter</button><button class="btn" id="showSignup">Créer un compte</button></div><div id="loginPanel"><h3 style="margin:0 0 8px">Connexion</h3><p class="muted">Retrouve tes statistiques et ton niveau enregistrés.</p><div><label for="loginEmail">Email</label><input id="loginEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="loginPassword">Mot de passe</label><input id="loginPassword" type="password" placeholder="Ton mot de passe" /></div><div style="margin-top:10px"><label style="display:flex;align-items:center;gap:10px;color:var(--text);font-size:14px;"><input id="rememberMe" type="checkbox" checked style="width:auto" />Rester connecté</label></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth">Fermer</button><button class="btn primary" id="loginSubmit">Connexion</button></div></div><div id="signupPanel" class="hidden"><h3 style="margin:0 0 8px">Créer un compte</h3><p class="muted">Une fois créé, ton espace reste lié à ton email.</p><div><label for="signupEmail">Email</label><input id="signupEmail" type="email" placeholder="ton@email.com" /></div><div style="margin-top:10px"><label for="signupPassword">Mot de passe</label><input id="signupPassword" type="password" placeholder="Choisis un mot de passe" /></div><div class="sheet-actions" style="margin-top:14px"><button class="btn" id="closeAuth2">Fermer</button><button class="btn primary" id="signupSubmit">Créer le compte</button></div></div></div></div>
+  <div class="modal" id="courtModal"><div class="sheet"><div class="sheet-photo" id="modalPhoto"></div><h3 id="modalTitle" style="margin:0 0 8px"></h3><p id="modalAddress"></p><p id="modalDesc"></p><div class="sheet-actions"><button class="btn" id="closeModal">Fermer</button><a class="btn primary" id="mapsLink" target="_blank">Ouvrir dans Maps</a></div></div></div>
+  <div class="modal" id="quickMatchModal"><div class="sheet"><div class="sheet-head"><div><p class="eyebrow" style="margin:0 0 8px;">Ajout rapide</p><h3 class="sheet-title">Enregistrer un match en quelques secondes</h3><p class="sheet-copy">Format plus app-like : résultat, terrain, coût, note. Le reste se met à jour immédiatement.</p></div><button class="btn" id="closeQuickMatch">Fermer</button></div><div class="form-grid"><div><label>Résultat</label><div class="form-chip-row"><button class="form-chip active" type="button" data-quick-result="win">Victoire</button><button class="form-chip" type="button" data-quick-result="loss">Défaite</button></div></div><div><label for="quickCourtSelect">Terrain</label><select id="quickCourtSelect"></select></div><div class="row-2"><div><label for="quickMatchDate">Date</label><input id="quickMatchDate" type="date" /></div><div><label for="quickCostInput">Coût du match (CHF)</label><input id="quickCostInput" type="number" step="0.5" min="0" placeholder="10 ou 15" /></div></div><div><label for="quickNotes">Note rapide</label><input id="quickNotes" type="text" maxlength="140" placeholder="Ex : solide au filet, match tendu" /></div><div class="sheet-actions"><button class="btn" type="button" id="quickFillFromMain">Reprendre le formulaire actuel</button><button class="btn primary" type="button" id="saveQuickMatch">Enregistrer</button></div></div></div></div>
+  <div class="bottom-nav hidden" id="bottomNav"><div class="inner"><button class="nav-btn active" data-view="home">Accueil</button><button class="nav-btn" data-view="courts">Terrains</button><button class="nav-btn primary-action-btn" id="bottomQuickAdd" type="button">Ajouter</button><button class="nav-btn" data-view="costs">Coûts</button><button class="nav-btn" data-view="events">Plus</button></div></div>
+  <div class="toast" id="appToast" aria-live="polite"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js').catch(() => {});
+      });
+    }
+  </script>
+  <script type="module" src="./assets/app/app.js"></script>
+</body>
+</html>

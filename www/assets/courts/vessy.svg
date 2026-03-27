@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#18212f"/>
+          <stop offset="52%" stop-color="#203347"/>
+          <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
+        <linearGradient id="fade" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(7,12,20,.85)"/>
+          <stop offset="100%" stop-color="rgba(7,12,20,.15)"/>
+        </linearGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <rect width="1200" height="700" fill="url(#bg)"/>
+      <g opacity="0.55"><rect x="751" y="314" width="182" height="101" rx="12" transform="rotate(10 842.0 364.5)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="569" y="321" width="160" height="107" rx="12" transform="rotate(-14 649.0 374.5)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="238" y="294" width="113" height="169" rx="12" transform="rotate(11 294.5 378.5)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="882" y="535" width="139" height="80" rx="12" transform="rotate(9 951.5 575.0)" fill="#5a6b35" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="963" y="340" width="117" height="95" rx="12" transform="rotate(6 1021.5 387.5)" fill="#3f4e66" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="238" y="212" width="155" height="102" rx="12" transform="rotate(2 315.5 263.0)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="160" y="402" width="224" height="165" rx="12" transform="rotate(11 272.0 484.5)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="406" y="182" width="138" height="136" rx="12" transform="rotate(-1 475.0 250.0)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="288" y="51" width="229" height="61" rx="12" transform="rotate(5 402.5 81.5)" fill="#5a6b35" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1039" y="515" width="154" height="143" rx="12" transform="rotate(-9 1116.0 586.5)" fill="#3f4e66" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="124" y="432" width="166" height="63" rx="12" transform="rotate(-4 207.0 463.5)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1001" y="360" width="222" height="143" rx="12" transform="rotate(-4 1112.0 431.5)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="674" y="293" width="214" height="72" rx="12" transform="rotate(7 781.0 329.0)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="795" y="229" width="175" height="146" rx="12" transform="rotate(-4 882.5 302.0)" fill="#5a6b35" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="90" y="167" width="120" height="123" rx="12" transform="rotate(-12 150.0 228.5)" fill="#3f4e66" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1072" y="105" width="227" height="111" rx="12" transform="rotate(10 1185.5 160.5)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="272" y="44" width="160" height="104" rx="12" transform="rotate(4 352.0 96.0)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="682" y="268" width="91" height="100" rx="12" transform="rotate(-1 727.5 318.0)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/></g>
+      <g><path d="M -40 92 C 297 42, 734 147, 1240 82" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="20" stroke-linecap="round"/><path d="M -40 171 C 122 121, 816 226, 1240 161" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="12" stroke-linecap="round"/><path d="M -40 248 C 294 198, 816 303, 1240 238" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="20" stroke-linecap="round"/><path d="M -40 336 C 140 286, 776 391, 1240 326" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="12" stroke-linecap="round"/><path d="M -40 404 C 122 354, 825 459, 1240 394" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="20" stroke-linecap="round"/></g>
+      <ellipse cx="633" cy="285" rx="230" ry="120" fill="#10b981" opacity="0.18" filter="url(#soft)"/>
+      <g transform="rotate(7 633 270)"><rect x="513" y="200" width="240" height="140" rx="12" fill="#2b7a78" stroke="rgba(255,255,255,.85)" stroke-width="4"/><rect x="531" y="214" width="204" height="112" rx="8" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="2.4"/><line x1="633" y1="214" x2="633" y2="326" stroke="rgba(255,255,255,.8)" stroke-width="2.2"/><line x1="531" y1="270" x2="735" y2="270" stroke="rgba(255,255,255,.8)" stroke-width="2.2"/><line x1="531" y1="262" x2="735" y2="262" stroke="rgba(255,255,255,.45)" stroke-width="1"/></g>
+      <g transform="translate(623 230)">
+      <path d="M0 0 C 18 -32, 64 -26, 64 10 C64 44, 32 68, 32 68 C32 68, 0 44, 0 10 C0 -4, 8 -15, 0 0Z" fill="#10b981" stroke="rgba(255,255,255,.85)" stroke-width="3"/>
+      <circle cx="32" cy="14" r="12" fill="white" opacity="0.95"/>
+      <circle cx="32" cy="14" r="5" fill="#14532d"/>
+    </g>
+      <rect x="0" y="0" width="1200" height="700" fill="url(#fade)"/>
+      <g font-family="Inter, Arial, sans-serif">
+        <text x="52" y="74" font-size="22" font-weight="700" fill="rgba(255,255,255,.72)">Repérage visuel provisoire</text>
+        <text x="52" y="124" font-size="46" font-weight="800" fill="white">Vessy</text>
+        <text x="52" y="164" font-size="24" fill="rgba(255,255,255,.82)">Route de Vessy 31, 1234 Vessy</text>
+        <rect x="52" y="560" width="300" height="84" rx="20" fill="rgba(10,15,23,.72)" stroke="rgba(255,255,255,.12)"/>
+        <text x="78" y="595" font-size="18" fill="rgba(255,255,255,.62)">Coordonnées approx.</text>
+        <text x="78" y="624" font-size="26" font-weight="700" fill="white">46.1846384, 6.1660281</text>
+        <rect x="915" y="54" width="230" height="52" rx="26" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
+        <text x="1030" y="87" text-anchor="middle" font-size="18" font-weight="700" fill="white">Vue type maps</text>
+      </g>
+    </svg>

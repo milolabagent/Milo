@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" width="1200" height="700">
+      <defs>
+        <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#18212f"/>
+          <stop offset="52%" stop-color="#203347"/>
+          <stop offset="100%" stop-color="#0f172a"/>
+        </linearGradient>
+        <linearGradient id="fade" x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0%" stop-color="rgba(7,12,20,.85)"/>
+          <stop offset="100%" stop-color="rgba(7,12,20,.15)"/>
+        </linearGradient>
+        <filter id="soft"><feGaussianBlur stdDeviation="18"/></filter>
+      </defs>
+      <rect width="1200" height="700" fill="url(#bg)"/>
+      <g opacity="0.55"><rect x="53" y="418" width="111" height="93" rx="12" transform="rotate(4 108.5 464.5)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="745" y="373" width="124" height="103" rx="12" transform="rotate(-3 807.0 424.5)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="851" y="320" width="180" height="107" rx="12" transform="rotate(-11 941.0 373.5)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="663" y="263" width="173" height="169" rx="12" transform="rotate(12 749.5 347.5)" fill="#5a6b35" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="329" y="204" width="219" height="79" rx="12" transform="rotate(7 438.5 243.5)" fill="#3f4e66" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="971" y="144" width="121" height="94" rx="12" transform="rotate(-12 1031.5 191.0)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1052" y="368" width="207" height="101" rx="12" transform="rotate(-10 1155.5 418.5)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="852" y="165" width="129" height="104" rx="12" transform="rotate(3 916.5 217.0)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1036" y="549" width="225" height="165" rx="12" transform="rotate(-7 1148.5 631.5)" fill="#5a6b35" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="888" y="194" width="237" height="75" rx="12" transform="rotate(13 1006.5 231.5)" fill="#3f4e66" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="48" y="271" width="208" height="149" rx="12" transform="rotate(7 152.0 345.5)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="963" y="564" width="158" height="126" rx="12" transform="rotate(-13 1042.0 627.0)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="130" y="110" width="182" height="150" rx="12" transform="rotate(-11 221.0 185.0)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="523" y="423" width="244" height="125" rx="12" transform="rotate(-13 645.0 485.5)" fill="#5a6b35" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1004" y="549" width="154" height="112" rx="12" transform="rotate(12 1081.0 605.0)" fill="#3f4e66" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="1004" y="581" width="159" height="165" rx="12" transform="rotate(-6 1083.5 663.5)" fill="#335c4a" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="238" y="567" width="126" height="71" rx="12" transform="rotate(10 301.0 602.5)" fill="#2f4f62" opacity="0.55" stroke="rgba(255,255,255,.08)"/><rect x="665" y="529" width="159" height="84" rx="12" transform="rotate(-12 744.5 571.0)" fill="#3f5d46" opacity="0.55" stroke="rgba(255,255,255,.08)"/></g>
+      <g><path d="M -40 85 C 263 35, 798 140, 1240 75" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="20" stroke-linecap="round"/><path d="M -40 180 C 305 130, 748 235, 1240 170" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="12" stroke-linecap="round"/><path d="M -40 252 C 286 202, 782 307, 1240 242" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="20" stroke-linecap="round"/><path d="M -40 325 C 136 275, 759 380, 1240 315" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="12" stroke-linecap="round"/><path d="M -40 411 C 220 361, 743 466, 1240 401" fill="none" stroke="rgba(244,246,248,.75)" stroke-width="20" stroke-linecap="round"/></g>
+      <ellipse cx="532" cy="274" rx="230" ry="120" fill="#17c3b2" opacity="0.18" filter="url(#soft)"/>
+      <g transform="rotate(8 532 259)"><rect x="412" y="189" width="240" height="140" rx="12" fill="#2b7a78" stroke="rgba(255,255,255,.85)" stroke-width="4"/><rect x="430" y="203" width="204" height="112" rx="8" fill="none" stroke="rgba(255,255,255,.75)" stroke-width="2.4"/><line x1="532" y1="203" x2="532" y2="315" stroke="rgba(255,255,255,.8)" stroke-width="2.2"/><line x1="430" y1="259" x2="634" y2="259" stroke="rgba(255,255,255,.8)" stroke-width="2.2"/><line x1="430" y1="251" x2="634" y2="251" stroke="rgba(255,255,255,.45)" stroke-width="1"/></g>
+      <g transform="translate(522 219)">
+      <path d="M0 0 C 18 -32, 64 -26, 64 10 C64 44, 32 68, 32 68 C32 68, 0 44, 0 10 C0 -4, 8 -15, 0 0Z" fill="#17c3b2" stroke="rgba(255,255,255,.85)" stroke-width="3"/>
+      <circle cx="32" cy="14" r="12" fill="white" opacity="0.95"/>
+      <circle cx="32" cy="14" r="5" fill="#0f766e"/>
+    </g>
+      <rect x="0" y="0" width="1200" height="700" fill="url(#fade)"/>
+      <g font-family="Inter, Arial, sans-serif">
+        <text x="52" y="74" font-size="22" font-weight="700" fill="rgba(255,255,255,.72)">Repérage visuel provisoire</text>
+        <text x="52" y="124" font-size="46" font-weight="800" fill="white">AirPad La Praille</text>
+        <text x="52" y="164" font-size="24" fill="rgba(255,255,255,.82)">Rte des Jeunes 28, 1212 Grand-Lancy</text>
+        <rect x="52" y="560" width="300" height="84" rx="20" fill="rgba(10,15,23,.72)" stroke="rgba(255,255,255,.12)"/>
+        <text x="78" y="595" font-size="18" fill="rgba(255,255,255,.62)">Coordonnées approx.</text>
+        <text x="78" y="624" font-size="26" font-weight="700" fill="white">46.1759592, 6.1279321</text>
+        <rect x="915" y="54" width="230" height="52" rx="26" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.18)"/>
+        <text x="1030" y="87" text-anchor="middle" font-size="18" font-weight="700" fill="white">Vue type maps</text>
+      </g>
+    </svg>
